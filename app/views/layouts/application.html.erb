@@ -13,6 +13,13 @@
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <%= yield %>
+
+    <div class="flex h-screen">
+      <%= render 'shared/sidebar' %>
+
+      <div class="flex-1 p-6 bg-white">
+        <%= yield %>
+      </div>
+    </div>
   </body>
 </html>

@@ -8,5 +8,12 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  get "dashboard" => "home#index", as: :dashboard
+  get "my_products" => "home#my_products", as: :my_products
+  get "discover" => "home#discover", as: :discover
+  get "my_profile" => "home#my_profile", as: :my_profile
+
+
   root "home#index"
 end
