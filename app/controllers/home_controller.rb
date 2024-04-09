@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  before_action :authenticate_user!
 
   def index
     render
@@ -9,7 +10,7 @@ class HomeController < ApplicationController
   end
 
   def discover
-    render :index
+    @products = Product.all
   end
 
   def my_profile

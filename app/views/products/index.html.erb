@@ -1,14 +1,24 @@
-<p style="color: green"><%= notice %></p>
+<% img = "https://images.unsplash.com/photo-1674296115670-8f0e92b1fddb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" %>
 
-<h1>Products</h1>
-
-<div id="products">
+<div class="flex flex-wrap -m-2">
   <% @products.each do |product| %>
-    <%= render product %>
-    <p>
-      <%= link_to "Show this product", product %>
-    </p>
+    <div class="p-2 w-full sm:w-1/2 lg:w-1/4">
+      <div class="transform transition duration-500 ease-in-out p-4 bg-white rounded-lg shadow hover:shadow-md hover:scale-105 hover:border-gray-300 border-2 border-transparent">
+        <img class="h-40 w-full rounded-t-lg object-cover object-center" src="<%= img %>" alt="<%= product.name %>" />
+        <div class="p-4">
+          <h3 class="mb-1 text-lg font-semibold tracking-tight text-gray-800"><%= product.name %></h3>
+          <p class="mb-3 text-sm font-normal text-gray-700"><%= product.description %></p>
+          <div class="flex items-center justify-between">
+            <div>
+              <span class="text-lg font-bold text-gray-900">$<%= product.price %></span>
+              <span class="text-xs font-medium text-gray-500 line-through">$<%= product.price + 20 %></span>
+            </div>
+            <button class="px-4 py-1 text-sm font-medium text-white bg-gray-800 rounded hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-opacity-50">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   <% end %>
 </div>
-
-<%= link_to "New product", new_product_path %>
