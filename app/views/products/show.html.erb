@@ -1,10 +1,15 @@
-<p style="color: green"><%= notice %></p>
+<div class="max-w-2xl mx-auto py-8 px-4 sm:px-6 lg:px-8 bg-white shadow-lg rounded-lg">
+  <% if notice %>
+    <div class="mb-4 px-4 py-2 bg-green-100 border border-green-400 text-green-700 rounded relative" role="alert">
+      <p class="font-bold"><%= notice %></p>
+    </div>
+  <% end %>
 
-<%= render @product %>
+  <%= render @product %>
 
-<div>
-  <%= link_to "Edit this product", edit_product_path(@product) %> |
-  <%= link_to "Back to products", products_path %>
-
-  <%= button_to "Destroy this product", @product, method: :delete %>
+  <div class="mt-6 flex justify-between">
+    <%= link_to "Edit this product", edit_product_path(@product), class: "px-4 py-2 bg-yellow-300 hover:bg-yellow-400 text-yellow-800 rounded-md font-semibold" %>
+    <%= link_to "Back to products", my_products_path, class: "px-4 py-2 bg-gray-300 hover:bg-gray-400 text-gray-800 rounded-md font-semibold" %>
+    <%= button_to "Destroy this product", @product, method: :delete, data: { confirm: "Are you sure?" }, class: "px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md font-semibold" %>
+  </div>
 </div>

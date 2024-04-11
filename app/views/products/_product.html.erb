@@ -1,27 +1,13 @@
-<div id="<%= dom_id product %>">
-  <p>
-    <strong>Name:</strong>
-    <%= product.name %>
-  </p>
+<div id="<%= dom_id product %>" class="space-y-3">
+  <h1 class="text-xl font-semibold text-gray-800"><%= product.name %></h1>
+  <p class="text-gray-600"><%= product.description %></p>
+  <p class="text-gray-600">Price: <%= number_to_currency(product.price) %></p>
+  <p class="text-gray-600">User ID: <%= product.user_id %></p>
 
-  <p>
-    <strong>Description:</strong>
-    <%= product.description %>
-  </p>
-
-  <p>
-    <strong>Price:</strong>
-    <%= product.price %>
-  </p>
-
-  <p>
-    <strong>User:</strong>
-    <%= product.user_id %>
-  </p>
-
-  <p>
-    <strong>Image:</strong>
-    <%= product.image %>
-  </p>
-
+  <% if product.image.present? %>
+    <div>
+      <strong class="block font-medium text-gray-700 mb-2">Image:</strong>
+      <%= image_tag(product.image) %>
+    </div>
+  <% end %>
 </div>

@@ -1,9 +1,10 @@
-<h1>New product</h1>
+<div class="max-w-2xl mx-auto my-8 px-6 py-4 bg-white shadow-md rounded">
+  <h1 class="text-xl mb-4 font-semibold text-gray-700">New Product</h1>
 
-<%= render "form", product: @product %>
+  <%= render "form", product: @product %>
 
-<br>
-
-<div>
-  <%= link_to "Back to products", products_path %>
+  <div class="mt-6">
+    <%= link_to "Back to products", my_products_path, class: "text-blue-600 hover:text-blue-700" %>
+  </div>
 </div>
+
