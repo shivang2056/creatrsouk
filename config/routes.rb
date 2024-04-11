@@ -13,7 +13,10 @@ Rails.application.routes.draw do
   get "dashboard" => "home#index", as: :dashboard
   get "my_products" => "home#my_products", as: :my_products
   get "discover" => "products#index", as: :discover
-  get "my_profile" => "home#my_profile", as: :my_profile
+
+  devise_scope :user do
+    get "my_profile" => "devise/registrations#edit", as: :my_profile
+  end
 
 
   root "home#index"

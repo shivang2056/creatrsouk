@@ -6,7 +6,7 @@ class HomeController < ApplicationController
   end
 
   def my_products
-    render :index
+    @bought_products = Product.all
   end
 
   def discover
