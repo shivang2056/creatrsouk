@@ -1,0 +1,23 @@
+<div class="bg-white p-6 rounded-lg shadow" data-controller="tab">
+  <div class="mb-4 border-b border-gray-200">
+    <ul class="flex flex-wrap -mb-px">
+      <li class="mr-2">
+        <%= link_to "Created", my_products_path,
+              class: "inline-block p-4 #{my_products_link_text_color} rounded-t-lg border-b-2 border-transparent hover:text-blue-800 hover:border-blue-500",
+              data: { turbo_frame: "tab_content", action: "click->tab#switch", tab_target: "link" } %>
+      </li>
+      <li class="mr-2">
+        <%= link_to "Bought", my_purchases_path,
+              class: "inline-block p-4 #{my_purchases_link_text_color} rounded-t-lg border-b-2 border-transparent hover:text-blue-800 hover:border-blue-500",
+              data: { turbo_frame: "tab_content", action: "click->tab#switch", tab_target: "link" } %>
+      </li>
+    </ul>
+  </div>
+  <div>
+    <div class="p-4 bg-gray-50 rounded-lg">
+      <%= turbo_frame_tag "tab_content" do %>
+        <%= yield %>
+      <% end %>
+    </div>
+  </div>
+</div>

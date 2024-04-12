@@ -57,6 +57,15 @@ class ProductsController < ApplicationController
     end
   end
 
+  def user_products
+    @bought_products = Product.limit(5)
+  end
+
+  def bought_products
+    @bought_products = Product.limit(5)
+    render :user_products
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
