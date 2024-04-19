@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   get "dashboard" => "home#index", as: :dashboard
   get "my_products" => "products#user_products", as: :my_products
-  get "my_purchases" => "purchases#user_purchases", as: :my_purchases
+  get "my_purchases" => "user_purchases#index", as: :my_purchases
   get "discover" => "products#index", as: :discover
 
   devise_scope :user do

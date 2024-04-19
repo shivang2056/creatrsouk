@@ -1,6 +1,6 @@
-class PurchasesController < ApplicationController
+class UserPurchasesController < ApplicationController
   before_action :authenticate_user!
-  def user_purchases
+  def index
     @bought_products = Product.limit(5)
   end
 end
