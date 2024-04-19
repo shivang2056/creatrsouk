@@ -11,14 +11,16 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   get "dashboard" => "home#index", as: :dashboard
+
   get "my_products" => "products#user_products", as: :my_products
-  get "my_purchases" => "user_purchases#index", as: :my_purchases
   get "discover" => "products#index", as: :discover
+
+  get "my_purchases" => "user_purchases#index", as: :my_purchases
+  post 'buy_now' => 'user_purchases#create', as: :buy_now
 
   devise_scope :user do
     get "my_profile" => "devise/registrations#edit", as: :my_profile
   end
-
 
   root "home#index"
 end

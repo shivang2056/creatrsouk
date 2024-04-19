@@ -14,8 +14,13 @@
     <p class="text-lg font-bold mb-4"><%= number_to_currency(@product.price) %></p>
     <p>Created by: <%= @product.user.email %></p>
 
-    <%= button_to 'Buy Now', '#', method: :post, class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
-    <%= button_to 'Add to Cart', '#', method: :post, class: 'bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded' %>
+    <% if product_created_by_current_user? %>
+      <%= button_to 'Edit Product', edit_product_path(@product), method: :post, class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 my-10 rounded' %>
+    <% elsif product_bought_by_current_user? %>
+      <div class="my-10 font-extrabold">Add Review</div>
+    <% else %>
+      <%= button_to 'Buy Now', buy_now_path(product_id: @product.id), method: :post, class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 my-10 rounded' %>
+    <% end %>
   </div>
 </div>
 
