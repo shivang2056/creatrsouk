@@ -1,11 +1,9 @@
-<div class="flex justify-between items-center mb-4"> <!-- Container for the search bar and cart icon -->
+<div class="flex justify-between items-center mb-4 ">
   <div class="relative">
-    <input type="text" class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none" placeholder="Search products...">
-    <button type="submit" class="absolute right-0 top-0 mt-2 mr-4">
-      <svg class="text-gray-600 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M10,20A10,10,0,1,0,3.22,16.78l4.62,4.62a1,1,0,1,0,1.41-1.41L4.63,15.37A8,8,0,1,1,10,18a7.93,7.93,0,0,1-1.67-.19A9.93,9.93,0,0,0,10,20Z" />
-      </svg>
-    </button>
+    <%= form_with method: :get, local: true, class: "flex" do |form| %>
+      <%= form.text_field :query, value: params[:query], class: 'rounded-l-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent', placeholder: 'Search products...' %>
+      <%= form.submit 'Search', class: 'text-sm bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-r-lg' %>
+    <% end %>
   </div>
 
   <div class="flex items-center">
