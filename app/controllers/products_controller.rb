@@ -59,7 +59,7 @@ class ProductsController < ApplicationController
   end
 
   def user_products
-    @bought_products = Product.limit(5)
+    @products = current_user.products.with_name(params[:query]).includes(:financial)
   end
 
   def bought_products

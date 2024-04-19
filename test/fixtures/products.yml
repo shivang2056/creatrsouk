@@ -12,130 +12,130 @@ product2:
   description: Description2
   price: 19.99
   active: true
-  user: user2
+  user: user1
 
 product3:
   name: Product3
   description: Description3
   price: 29.99
   active: true
-  user: user3
+  user: user1
 
 product4:
   name: Product4
   description: Description4
   price: 39.99
   active: true
-  user: user4
+  user: user1
 
 product5:
   name: Product5
   description: Description5
   price: 49.99
   active: true
-  user: user5
+  user: user1
 
 product6:
   name: Product6
   description: Description6
   price: 19.99
   active: true
-  user: user6
+  user: user1
 
 product7:
   name: Product7
   description: Description7
   price: 29.99
   active: true
-  user: user7
+  user: user2
 
 product8:
   name: Product8
   description: Description8
   price: 39.99
   active: true
-  user: user8
+  user: user3
 
 product9:
   name: Product9
   description: Description9
   price: 49.99
   active: true
-  user: user9
+  user: user4
 
 product10:
   name: Product10
   description: Description10
   price: 1.99
   active: true
-  user: user10
+  user: user5
 
 product11:
   name: Product11
   description: Description11
   price: 2.99
   active: true
-  user: user11
+  user: user6
 
 product12:
   name: Product12
   description: Description12
   price: 3.99
   active: true
-  user: user12
+  user: user7
 
 product13:
   name: Product13
   description: Description13
   price: 4.99
   active: true
-  user: user13
+  user: user8
 
 product14:
   name: Product14
   description: Description14
   price: 5.99
   active: true
-  user: user14
+  user: user2
 
 product15:
   name: Product15
   description: Description15
   price: 6.99
   active: true
-  user: user15
+  user: user3
 
 product16:
   name: Product16
   description: Description16
   price: 7.99
   active: true
-  user: user16
+  user: user4
 
 product17:
   name: Product17
   description: Description17
   price: 8.99
   active: true
-  user: user17
+  user: user5
 
 product18:
   name: Product18
   description: Description18
   price: 4.99
   active: true
-  user: user18
+  user: user6
 
 product19:
   name: Product19
   description: Description19
   price: 91.99
   active: true
-  user: user19
+  user: user7
 
 product20:
   name: Product20
   description: Description20
   price: 92.99
   active: true
-  user: user20
+  user: user8

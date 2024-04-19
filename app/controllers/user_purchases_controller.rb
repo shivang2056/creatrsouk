@@ -7,7 +7,13 @@ class UserPurchasesController < ApplicationController
   def create
     @product = Product.find(params[:product_id])
 
-    if current_user.purchases.create(product: @product)
+    # TODO: Refactor to wrap it into Transaction
+    if current_user.purchases.create(product: @product, price: @product.price)
+      financial = @product.financial || @product.initialize_financial(user: product.user)
+      financial.revenue += @product.price
+      financial.sales += 1
+      financial.save!
+
       redirect_to my_purchases_path
     else
       render 'products/show'

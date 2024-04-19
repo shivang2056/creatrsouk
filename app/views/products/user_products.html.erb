@@ -1,8 +1,8 @@
 <%= render layout: "shared/my_products" do %>
   <div class="flex justify-between mb-4">
     <div class>
-      <%= form_with(url: '#', method: "get", local: true, class: "flex") do %>
-        <%= text_field_tag :search, params[:search], placeholder: "Search products...", class: "rounded-l-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" %>
+      <%= form_with(url: my_products_url, method: "get", local: true, class: "flex") do %>
+        <%= text_field_tag :query, params[:query], placeholder: "Search products...", class: "rounded-l-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" %>
         <%= submit_tag "Search", class: "text-sm bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-r-lg" %>
       <% end %>
     </div>
@@ -34,47 +34,35 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-          <p class="text-gray-900 whitespace-no-wrap">Product 1</p>
-        </td>
-        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-          <p class="text-gray-900 whitespace-no-wrap">23</p>
-        </td>
-        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-          <p class="text-gray-900 whitespace-no-wrap">$1,200</p>
-        </td>
-        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-          <p class="text-gray-900 whitespace-no-wrap">$50</p>
-        </td>
-        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-          <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-            <span aria-hidden="true" class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-            <span class="relative">Active</span>
-          </span>
-        </td>
-      </tr>
-      <tr>
-        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-          <p class="text-gray-900 whitespace-no-wrap">Product 2</p>
-        </td>
-        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-          <p class="text-gray-900 whitespace-no-wrap">21</p>
-        </td>
-        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-          <p class="text-gray-900 whitespace-no-wrap">$2,200</p>
-        </td>
-        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-          <p class="text-gray-900 whitespace-no-wrap">$90</p>
-        </td>
-        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-          <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
-            <span aria-hidden="true" class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
-            <span class="relative">Inactive</span>
-          </span>
-        </td>
-      </tr>
-      <%# Add more rows with static data as needed %>
+      <% @products.each do |product| %>
+        <tr>
+          <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+            <%= link_to product.name, product_path(product), class: "text-blue-600 hover:text-blue-900 hover:underline hover:underline-offset-3 whitespace-no-wrap", data: { turbo_frame: "_top" } %>
+          </td>
+          <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+            <p class="text-gray-900 whitespace-no-wrap"><%= product.financial&.sales || 0 %></p>
+          </td>
+          <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+            <p class="text-gray-900 whitespace-no-wrap">$<%= product.financial&.revenue&.to_f || 0 %></p>
+          </td>
+          <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+            <p class="text-gray-900 whitespace-no-wrap">$<%= product.price %></p>
+          </td>
+          <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+            <% if product.active? %>
+              <span class="relative inline-block px-3 py-1 font-semibold leading-tight text-green-900">
+                <span aria-hidden="true" class="absolute inset-0 opacity-50 rounded-full bg-green-200"></span>
+                <span class="relative">Active</span>
+              </span>
+            <% else %>
+              <span class="relative inline-block px-3 py-1 font-semibold leading-tight text-red-900">
+                <span aria-hidden="true" class="absolute inset-0 opacity-50 rounded-full bg-red-200"></span>
+                <span class="relative">Inactive</span>
+              </span>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
     </tbody>
   </table>
 <% end %>
