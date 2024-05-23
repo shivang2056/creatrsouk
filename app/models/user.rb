@@ -6,4 +6,5 @@ class User < ApplicationRecord
 
   has_many :products
   has_many :purchases, class_name: "UserPurchase"
+  has_one :account
 end

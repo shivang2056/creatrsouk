@@ -84,6 +84,7 @@ GEM
     bootsnap (1.18.3)
       msgpack (~> 1.2)
     builder (3.2.4)
+    byebug (11.1.3)
     capybara (3.40.0)
       addressable
       matrix
@@ -246,6 +247,7 @@ GEM
     stimulus-rails (1.3.3)
       railties (>= 6.0.0)
     stringio (3.1.0)
+    stripe (11.4.0)
     thor (1.3.1)
     timeout (0.4.1)
     turbo-rails (2.0.5)
@@ -280,6 +282,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap
+  byebug (~> 11.1)
   capybara
   cssbundling-rails
   debug
@@ -295,6 +298,7 @@ DEPENDENCIES
   sidekiq (~> 7.2)
   sprockets-rails
   stimulus-rails
+  stripe (~> 11.4)
   turbo-rails
   tzinfo-data
   web-console

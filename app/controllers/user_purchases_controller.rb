@@ -1,5 +1,5 @@
 class UserPurchasesController < ApplicationController
-  before_action :authenticate_user!
+
   def index
     @bought_products = current_user.purchases.map(&:product)
   end

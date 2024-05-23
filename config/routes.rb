@@ -24,5 +24,7 @@ Rails.application.routes.draw do
 
   post '/webhooks/:source', to: 'webhooks#create'
 
+  resource :account, only: [:show, :create]
+
   root "home#index"
 end
