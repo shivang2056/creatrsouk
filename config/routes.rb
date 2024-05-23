@@ -22,5 +22,7 @@ Rails.application.routes.draw do
     get "my_profile" => "devise/registrations#edit", as: :my_profile
   end
 
+  post '/webhooks/:source', to: 'webhooks#create'
+
   root "home#index"
 end
