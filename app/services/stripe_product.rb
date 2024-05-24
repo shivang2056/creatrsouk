@@ -19,7 +19,7 @@ class StripeProduct
         currency: 'USD',
         unit_amount: (@product.price.to_f * 100).to_i
       },
-      expand: ['default_price'],
+      expand: ['default_price']
     }, {
       stripe_account: product.user.account.stripe_id
     })

@@ -14,6 +14,8 @@ class EventJob < ApplicationJob
     case stripe_event.type
     when 'account.updated'
       handle_account_updated(stripe_event)
+    when 'checkout.session.completed'
+      handle_checkout_session_completed(stripe_event)
     end
   end
 
@@ -25,5 +27,42 @@ class EventJob < ApplicationJob
       payouts_enabled: stripe_account.payouts_enabled,
       details_submitted: stripe_account.details_submitted
     )
+  end
+
+  def handle_checkout_session_completed(stripe_event)
+    session = Stripe::Checkout::Session.retrieve({
+      id: stripe_event.data.object.id,
+      expand: ['line_items']
+    }, header(stripe_event))
+
+    return if session.payment_status != 'paid'
+
+    product = Product.find_by(stripe_id: session.line_items.data[0].price.product)
+    customer = User.find_by_email(session.customer_details.email)
+
+    if customer.present?
+      customer.purchases.create(product: product, price: product.price)
+    end
+
+    payment_intent = Stripe::PaymentIntent.retrieve({
+      id: session.payment_intent
+      }, header(stripe_event))
+
+    latest_charge = Stripe::Charge.retrieve({
+      id: payment_intent.latest_charge
+      }, header(stripe_event))
+
+    balance_transaction = Stripe::BalanceTransaction.retrieve({
+      id: latest_charge.balance_transaction
+      }, header(stripe_event))
+
+    financial = product.financial || product.build_financial(user: product.user, sales: 0, revenue: 0)
+    financial.revenue += ( balance_transaction.net / 100.00)
+    financial.sales += 1
+    financial.save!
+  end
+
+  def header(event)
+    { stripe_account: event.account }
   end
 end

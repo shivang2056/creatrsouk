@@ -5,18 +5,22 @@ class UserPurchasesController < ApplicationController
   end
 
   def create
-    @product = Product.find(params[:product_id])
+    product = Product.find(params[:product_id])
+    account = product.user.account
 
-    # TODO: Refactor to wrap it into Transaction
-    if current_user.purchases.create(product: @product, price: @product.price)
-      financial = @product.financial || @product.initialize_financial(user: product.user)
-      financial.revenue += @product.price
-      financial.sales += 1
-      financial.save!
+    checkout_session = Stripe::Checkout::Session.create({
+      customer_email: current_user.email,
+      mode: 'payment',
+      success_url: my_purchases_url,
+      cancel_url: product_url(product),
+      line_items: [{
+        price: product.stripe_price_id,
+        quantity: 1,
+      }]
+    }, {
+      stripe_account: account.stripe_id,
+    })
 
-      redirect_to my_purchases_path
-    else
-      render 'products/show'
-    end
+    redirect_to checkout_session.url, allow_other_host: true, status: :see_other
   end
 end
