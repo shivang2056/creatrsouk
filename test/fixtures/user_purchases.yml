@@ -1,91 +1,91 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-purchase1:
-  user: user2
-  product: product1
-  price: 9.99
+# purchase1:
+#   user: user2
+#   product: product1
+#   price: 9.99
 
-purchase2:
-  user: user3
-  product: product1
-  price: 9.99
+# purchase2:
+#   user: user3
+#   product: product1
+#   price: 9.99
 
-purchase3:
-  user: user4
-  product: product1
-  price: 9.99
+# purchase3:
+#   user: user4
+#   product: product1
+#   price: 9.99
 
-purchase4:
-  user: user5
-  product: product1
-  price: 9.99
+# purchase4:
+#   user: user5
+#   product: product1
+#   price: 9.99
 
-purchase5:
-  user: user6
-  product: product1
-  price: 9.99
+# purchase5:
+#   user: user6
+#   product: product1
+#   price: 9.99
 
-purchase6:
-  user: user2
-  product: product2
-  price: 19.99
+# purchase6:
+#   user: user2
+#   product: product2
+#   price: 19.99
 
-purchase7:
-  user: user3
-  product: product2
-  price: 19.99
+# purchase7:
+#   user: user3
+#   product: product2
+#   price: 19.99
 
-purchase8:
-  user: user4
-  product: product2
-  price: 19.99
+# purchase8:
+#   user: user4
+#   product: product2
+#   price: 19.99
 
-purchase9:
-  user: user5
-  product: product2
-  price: 19.99
+# purchase9:
+#   user: user5
+#   product: product2
+#   price: 19.99
 
-purchase10:
-  user: user2
-  product: product3
-  price: 29.99
+# purchase10:
+#   user: user2
+#   product: product3
+#   price: 29.99
 
-purchase11:
-  user: user3
-  product: product3
-  price: 29.99
+# purchase11:
+#   user: user3
+#   product: product3
+#   price: 29.99
 
-purchase12:
-  user: user4
-  product: product3
-  price: 29.99
+# purchase12:
+#   user: user4
+#   product: product3
+#   price: 29.99
 
-purchase13:
-  user: user2
-  product: product4
-  price: 39.99
+# purchase13:
+#   user: user2
+#   product: product4
+#   price: 39.99
 
-purchase14:
-  user: user3
-  product: product4
-  price: 39.99
+# purchase14:
+#   user: user3
+#   product: product4
+#   price: 39.99
 
-purchase15:
-  user: user1
-  product: product7
-  price: 29.99
+# purchase15:
+#   user: user1
+#   product: product7
+#   price: 29.99
 
-purchase16:
-  user: user1
-  product: product8
-  price: 39.99
+# purchase16:
+#   user: user1
+#   product: product8
+#   price: 39.99
 
-purchase17:
-  user: user1
-  product: product9
-  price: 49.99
+# purchase17:
+#   user: user1
+#   product: product9
+#   price: 49.99
 
-purchase18:
-  user: user1
-  product: product10
-  price: 1.99
+# purchase18:
+#   user: user1
+#   product: product10
+#   price: 1.99

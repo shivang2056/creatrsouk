@@ -14,6 +14,7 @@ class EventJob < ApplicationJob
     case stripe_event.type
     when 'account.updated'
       handle_account_updated(stripe_event)
+    end
   end
 
   def handle_account_updated(stripe_event)

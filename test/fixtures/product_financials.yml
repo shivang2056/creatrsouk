@@ -1,49 +1,49 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-financial1:
-  user: user1
-  product: product1
-  revenue: 49.95
-  sales: 5
+# financial1:
+#   user: user1
+#   product: product1
+#   revenue: 49.95
+#   sales: 5
 
-financial2:
-  user: user1
-  product: product2
-  revenue: 79.96
-  sales: 4
+# financial2:
+#   user: user1
+#   product: product2
+#   revenue: 79.96
+#   sales: 4
 
-financial3:
-  user: user1
-  product: product3
-  revenue: 89.97
-  sales: 3
+# financial3:
+#   user: user1
+#   product: product3
+#   revenue: 89.97
+#   sales: 3
 
-financial4:
-  user: user1
-  product: product4
-  revenue: 79.98
-  sales: 2
+# financial4:
+#   user: user1
+#   product: product4
+#   revenue: 79.98
+#   sales: 2
 
-financial1:
-  user: user2
-  product: product7
-  revenue: 29.99
-  sales: 1
+# financial1:
+#   user: user2
+#   product: product7
+#   revenue: 29.99
+#   sales: 1
 
-financial2:
-  user: user3
-  product: product8
-  revenue: 39.99
-  sales: 1
+# financial2:
+#   user: user3
+#   product: product8
+#   revenue: 39.99
+#   sales: 1
 
-financial1:
-  user: user4
-  product: product9
-  revenue: 49.99
-  sales: 1
+# financial1:
+#   user: user4
+#   product: product9
+#   revenue: 49.99
+#   sales: 1
 
-financial2:
-  user: user5
-  product: product10
-  revenue: 1.99
-  sales: 1
+# financial2:
+#   user: user5
+#   product: product10
+#   revenue: 1.99
+#   sales: 1

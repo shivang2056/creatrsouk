@@ -25,6 +25,9 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
+        service = StripeProduct.new(@product)
+        service.create_product
+
         format.html { redirect_to product_url(@product), notice: "Product was successfully created." }
         format.json { render :show, status: :created, location: @product }
       else
