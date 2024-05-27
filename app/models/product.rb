@@ -5,4 +5,5 @@ class Product < ApplicationRecord
   has_one :financial, class_name: "ProductFinancial"
 
   scope :with_name, ->(name) { where("name ilike '%#{name}%'") if name.present? }
+  scope :active, -> { where(active: true) }
 end
