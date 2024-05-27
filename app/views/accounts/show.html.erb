@@ -1,9 +1,14 @@
 <%= render layout: "shared/settings" do %>
   <% if @account.present? %>
     <div class="bg-white shadow overflow-hidden sm:rounded-lg mt-4">
-      <div class="px-4 py-5 sm:px-6">
-        <h3 class="text-lg leading-6 font-medium text-gray-900">Payment account information</h3>
-        <p class="mt-1 max-w-2xl text-sm text-gray-500">Stripe Account</p>
+      <div class="px-4 py-5 sm:px-6 flex justify-between">
+        <div>
+          <h3 class="text-lg leading-6 font-medium text-gray-900">Payment account information</h3>
+          <p class="mt-1 max-w-2xl text-sm text-gray-500">Stripe Account</p>
+        </div>
+        <div class="flex items-center">
+          <%= link_to 'Stripe Dashboard', 'https://dashboard.stripe.com/login', class: 'bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded' %>
+        </div>
       </div>
       <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
         <dl class="sm:divide-y sm:divide-gray-200">
