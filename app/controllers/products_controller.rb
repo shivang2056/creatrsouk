@@ -25,8 +25,7 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
-        service = StripeProduct.new(@product)
-        service.create_product
+        create_stripe_product
 
         format.html { redirect_to product_url(@product), notice: "Product was successfully created." }
         format.json { render :show, status: :created, location: @product }
@@ -78,5 +77,9 @@ class ProductsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def product_params
       params.require(:product).permit(:name, :description, :price, :user_id, :image, :active)
+    end
+
+    def create_stripe_product
+      StripeProductJob.perform_later(@product)
     end
 end
