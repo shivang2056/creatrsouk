@@ -16,7 +16,7 @@
             <% if current_user.account.details_submitted? %>
               <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"><%= current_user.account.details_submitted? %></dd>
             <% else %>
-              <%= render "onboarding_button", title: 'Finish Onboarding' %>
+              <%= render "onboarding_button", title: 'Finish Stripe Onboarding' %>
             <% end %>
           </div>
           <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -31,8 +31,8 @@
       </div>
     </div>
   <% else %>
-    <div class="mt-4">
-      <%= render "onboarding_button", title: 'Create a Stripe Account' %>
+    <div class="m-4 mt-6">
+      <%= render "onboarding_button", title: 'Connect with Stripe' %>
     </div>
   <% end %>
 <% end %>
