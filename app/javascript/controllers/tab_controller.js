@@ -5,11 +5,13 @@ export default class extends Controller {
 
   switch(event) {
     this.linkTargets.forEach((element) => {
-      element.classList.remove('text-blue-600')
-      element.classList.add('text-gray-500')
+      element.classList.remove('bg-white')
+      element.classList.remove('shadow')
+      element.classList.add('hover:bg-gray-300')
     })
 
-    event.currentTarget.classList.remove('text-gray-500')
-    event.currentTarget.classList.add('text-blue-600')
+    event.currentTarget.classList.remove('hover:bg-gray-300')
+    event.currentTarget.classList.add('bg-white')
+    event.currentTarget.classList.add('shadow')
   }
 }

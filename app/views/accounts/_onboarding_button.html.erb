@@ -1,6 +1,3 @@
 <%= form_with url: "/account", local: true, data: { turbo: false } do |form| %>
-  <%= form.button class: "inline-flex items-center justify-center w-full px-5 py-3 font-medium text-center text-gray-900 border border-gray-200 rounded-lg sm:w-auto hover:bg-gray-200 focus:ring-4 focus:ring-gray-100" do %>
-    <%= image_tag 'stripe.svg', class: 'h-6 h-6 mr-2 w-auto' %>
-    <span><%= title %></span>
-  <% end %>
+  <%= form.submit title, class: "text-sm duration-200 border font-medium focus:outline-none focus:ring-2 bg-gray-800 hover:bg-gray-900 text-white border-gray-600 rounded-md focus:z-10 py-2 px-4" %>
 <% end %>

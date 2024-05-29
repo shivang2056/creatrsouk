@@ -1,5 +1,5 @@
 <% if user_signed_in? %>
-  <div class="flex flex-col w-56 h-full bg-white fixed top-0 left-0 h-full overflow-y-auto z-30 border-r border-gray-200 shadow-gray-800">
+  <div class="flex flex-col w-56 h-screen fixed top-0 left-0 bg-white overflow-y-auto z-30 border-r border-gray-200 shadow-gray-800">
     <div class="flex flex-col pt-5 pb-4 overflow-y-auto">
       <div class="flex items-center flex-shrink-0 px-8 pb-4 border-b border-gray-200">
         <img class="h-8 w-auto" src="<%= image_path('logo.svg') %>" alt="Your Logo">
@@ -60,7 +60,7 @@
 
       <div class="w-36">
         <div class="text-sm font-semibold text-gray-800 truncate">
-          <%= current_user.email.split('@')[0] %>
+          <%= current_user.full_name %>
         </div>
         <div class="text-xs text-gray-500 truncate">
           <%= current_user.email %>

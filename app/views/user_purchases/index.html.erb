@@ -1,15 +1,22 @@
 <%= render layout: "shared/my_products" do %>
   <% img = "https://images.unsplash.com/photo-1674296115670-8f0e92b1fddb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" %>
 
-  <div class="flex flex-wrap -m-2">
+  <div class="flex flex-wrap -m-4">
     <% @bought_products.each do |product| %>
-      <div class="p-2 w-full sm:w-1/2 lg:w-1/4">
+      <div class="p-4 w-full sm:w-1/2 lg:w-1/4 mt-12">
         <%= link_to product_path(product), data: { turbo_frame: "_top" } do %>
-          <div class="transform transition duration-500 ease-in-out p-4 bg-white rounded-lg shadow hover:shadow-md hover:scale-105 hover:border-gray-300 border-2 border-transparent">
-            <img class="h-40 w-full rounded-t-lg object-cover object-center" src="<%= img %>" alt="<%= product.name %>" />
-            <div class="p-4">
-              <h3 class="mb-1 text-lg font-semibold tracking-tight text-gray-800"><%= product.name %></h3>
-              <p class="mb-3 text-sm font-normal text-gray-700"><%= product.description %></p>
+          <div class="h-96 transform transition duration-500 ease-in-out bg-white rounded-lg shadow hover:shadow-md hover:scale-105 hover:border-gray-300">
+            <img class="h-60 w-full rounded-t-lg object-cover object-center" src="<%= img %>" alt="<%= product.name %>" />
+            <div class="h-36 p-4 flex flex-col">
+              <h1 class="mb-1 text-xl font-semibold tracking-tight text-gray-800"><%= product.name %></h1>
+              <p class="mb-3 text-sm font-normal text-gray-500 line-clamp-2"><%= product.description %></p>
+              <div class="mt-auto flex space-x-1.5 items-center text-gray-800">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+                  <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" clip-rule="evenodd" />
+                </svg>
+
+                <h1 class="text-base underline"><%= product.user.full_name %></h1>
+              </div>
             </div>
           </div>
         <% end %>
