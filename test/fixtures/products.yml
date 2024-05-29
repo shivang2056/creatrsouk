@@ -1,141 +1,143 @@
 # # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+# <% description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas venenatis metus vel eros feugiat, at pretium mi congue. Nunc interdum venenatis lectus, ac ornare tellus ultricies nec. Suspendisse potenti. Curabitur mi leo, rhoncus ut mauris quis, luctus egestas elit. Nullam iaculis orci vitae nunc ultrices, id cursus erat aliquam. Nulla facilisi. Aenean hendrerit ex at iaculis varius. Suspendisse egestas non felis sit amet congue. Donec malesuada sodales condimentum. Cras sodales efficitur odio, quis congue urna sollicitudin auctor. Aenean tincidunt rhoncus." %>
+
 # product1:
 #   name: Product1
-#   description: Description1
+#   description: <%= description %>
 #   price: 9.99
 #   active: true
 #   user: user1
 
 # product2:
 #   name: Product2
-#   description: Description2
+#   description: <%= description %>
 #   price: 19.99
 #   active: true
 #   user: user1
 
 # product3:
 #   name: Product3
-#   description: Description3
+#   description: <%= description %>
 #   price: 29.99
 #   active: true
 #   user: user1
 
 # product4:
 #   name: Product4
-#   description: Description4
+#   description: <%= description %>
 #   price: 39.99
 #   active: true
 #   user: user1
 
 # product5:
 #   name: Product5
-#   description: Description5
+#   description: <%= description %>
 #   price: 49.99
 #   active: true
 #   user: user1
 
 # product6:
 #   name: Product6
-#   description: Description6
+#   description: <%= description %>
 #   price: 19.99
 #   active: true
 #   user: user1
 
 # product7:
 #   name: Product7
-#   description: Description7
+#   description: <%= description %>
 #   price: 29.99
 #   active: true
 #   user: user2
 
 # product8:
 #   name: Product8
-#   description: Description8
+#   description: <%= description %>
 #   price: 39.99
 #   active: true
 #   user: user3
 
 # product9:
 #   name: Product9
-#   description: Description9
+#   description: <%= description %>
 #   price: 49.99
 #   active: true
 #   user: user4
 
 # product10:
 #   name: Product10
-#   description: Description10
+#   description: <%= description %>
 #   price: 1.99
 #   active: true
 #   user: user5
 
 # product11:
 #   name: Product11
-#   description: Description11
+#   description: <%= description %>
 #   price: 2.99
 #   active: true
 #   user: user6
 
 # product12:
 #   name: Product12
-#   description: Description12
+#   description: <%= description %>
 #   price: 3.99
 #   active: true
 #   user: user7
 
 # product13:
 #   name: Product13
-#   description: Description13
+#   description: <%= description %>
 #   price: 4.99
 #   active: true
 #   user: user8
 
 # product14:
 #   name: Product14
-#   description: Description14
+#   description: <%= description %>
 #   price: 5.99
 #   active: true
 #   user: user2
 
 # product15:
 #   name: Product15
-#   description: Description15
+#   description: <%= description %>
 #   price: 6.99
 #   active: true
 #   user: user3
 
 # product16:
 #   name: Product16
-#   description: Description16
+#   description: <%= description %>
 #   price: 7.99
 #   active: true
 #   user: user4
 
 # product17:
 #   name: Product17
-#   description: Description17
+#   description: <%= description %>
 #   price: 8.99
 #   active: true
 #   user: user5
 
 # product18:
 #   name: Product18
-#   description: Description18
+#   description: <%= description %>
 #   price: 4.99
 #   active: true
 #   user: user6
 
 # product19:
 #   name: Product19
-#   description: Description19
+#   description: <%= description %>
 #   price: 91.99
 #   active: true
 #   user: user7
 
 # product20:
 #   name: Product20
-#   description: Description20
+#   description: <%= description %>
 #   price: 92.99
 #   active: true
 #   user: user8
