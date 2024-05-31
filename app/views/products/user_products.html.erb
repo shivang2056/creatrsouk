@@ -1,5 +1,5 @@
 <%= render layout: "shared/my_products" do %>
-  <% unless current_user.account.present? && current_user.account.details_submitted? %>
+  <% if current_user.account.present? && current_user.account.details_submitted? %>
     <div class="flex justify-between mt-12 border-b border-gray-200 pb-8">
       <div>
         <%= form_with(url: my_products_url, method: "get", local: true, class: "flex") do %>
