@@ -18,8 +18,8 @@ class StripeAccount
       email: account.user.email,
       business_type: 'individual',
       individual: {
-        first_name: 'test' + account.user.email.split('@').first,
-        last_name: 'user',
+        first_name: account.user.firstname,
+        last_name: account.user.lastname,
         email: account.user.email,
         phone: '5005550006',
         dob: {

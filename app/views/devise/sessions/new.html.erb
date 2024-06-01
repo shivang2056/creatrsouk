@@ -1,26 +1,41 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<div class="flex flex-col text-left space-y-2">
+  <div class="flex flex-col text-left space-y-1">
+    <h4 class="text-2xl text-gray-900 font-bold">Welcome Back!</h4>
+    <p class="text-2xl text-gray-900 font-medium tracking-wider">Sign in to Continue ➡️
+    </p>
   </div>
+</div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "flex flex-col space-y-4 w-full" }) do |f| %>
+  <div>
+    <div class="w-full">
+      <%= f.label :email, "Email *", class: "flex items-center gap-1 text-sm font-medium text-gray-700" %>
+      <div class="mt-1">
+        <%= f.email_field :email, required: true, autocomplete: "email", placeholder: "name@email.com", class: "appearance-none block w-full px-3 py-2 border hover:border-gray-500 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-transparent focus:border-gray-900 text-sm h-10 border-gray-300 opacity-100" %>
+      </div>
     </div>
-  <% end %>
+  </div>
+  <div>
+    <div class="w-full">
+      <%= f.label :password, "Password *", class: "flex items-center gap-1 text-sm font-medium text-gray-700" %>
+      <div class="mt-1">
+        <%= f.password_field :password, required: true, autocomplete: "new-password", placeholder: "**********", class: "appearance-none block w-full px-3 py-2 border hover:border-gray-500 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-transparent focus:border-gray-900 text-sm h-10 border-gray-300 opacity-100" %>
+      </div>
+    </div>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
+    <span class="text-sm text-gray-900 font-normal flex justify-end">
+      <%= link_to "Forgot your password?", new_password_path(resource_name), class: "text-gray-500 font-medium underline" %>
+    </span>
+  </div>
+
+  <div class="pt-6 w-full">
+    <%= f.submit "Sign In", class: "text-sm duration-200 border font-medium focus:outline-none focus:ring-2 inline-flex items-center whitespace-nowrap bg-gray-800 hover:bg-gray-900 text-white justify-center rounded-md shadow-sm border-transparent p-4 w-full" %>
   </div>
 <% end %>
 
-<%= render "devise/shared/links" %>
+<div class="flex flex-col text-left space-y-2">
+  <span class="text-sm text-gray-900 font-normal">
+    Don't have an account?
+    <%= link_to "Create One", new_registration_path(resource_name), class: "text-gray-500 font-medium underline" %>
+  </span>
+</div>

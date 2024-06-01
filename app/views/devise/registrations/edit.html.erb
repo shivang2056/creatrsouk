@@ -10,8 +10,18 @@
       <%= render "devise/shared/error_messages", resource: resource %>
 
       <div class="w-1/2">
+        <%= f.label :firstname, 'First Name', class: "flex items-center gap-1 text-sm font-medium text-gray-700" %>
+        <%= f.text_field :firstname, autofocus: true, class: "appearance-none block w-full px-3 py-2 h-5 mt-1 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 text-sm h-full border-gray-300 opacity-100" %>
+      </div>
+
+      <div class="w-1/2">
+        <%= f.label :lastname, 'Last Name', class: "flex items-center gap-1 text-sm font-medium text-gray-700" %>
+        <%= f.text_field :lastname, class: "appearance-none block w-full px-3 py-2 h-5 mt-1 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 text-sm h-full border-gray-300 opacity-100" %>
+      </div>
+
+      <div class="w-1/2">
         <%= f.label :email, class: "flex items-center gap-1 text-sm font-medium text-gray-700" %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "appearance-none block w-full px-3 py-2 h-5 mt-1 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 text-sm h-full border-gray-300 opacity-100" %>
+        <%= f.email_field :email, autocomplete: "email", class: "appearance-none block w-full px-3 py-2 h-5 mt-1 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 text-sm h-full border-gray-300 opacity-100" %>
       </div>
 
       <div class="w-1/2">
@@ -19,20 +29,20 @@
           <%= f.label :password, class: "flex items-center gap-1 text-sm font-medium text-gray-700" %>
           <span class="ml-2 mt-1 inline leading-snug text-xs text-gray-500 font-normal">leave blank if you don't want to change it</span>
         </div>
-        <%= f.password_field :password, autocomplete: "new-password", class: "appearance-none block w-full px-3 py-2 h-5 mt-1 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 text-sm h-full border-gray-300 opacity-100" %>
+        <%= f.password_field :password, autocomplete: "new-password", placeholder: "**********", class: "appearance-none block w-full px-3 py-2 h-5 mt-1 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 text-sm h-full border-gray-300 opacity-100" %>
         <% if @minimum_password_length %>
           <span class="mt-1 block leading-snug text-xs text-gray-500 font-normal"><%= @minimum_password_length %> characters minimum</span>
         <% end %>
       </div>
 
       <div class="w-1/2">
-        <%= f.label :password_confirmation, class: "flex items-center gap-1 text-sm font-medium text-gray-700" %>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "appearance-none block w-full px-3 py-2 h-5 mt-1 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 text-sm h-full border-gray-300 opacity-100" %>
+        <%= f.label :password_confirmation, 'Password Confirmation', class: "flex items-center gap-1 text-sm font-medium text-gray-700" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "**********", class: "appearance-none block w-full px-3 py-2 h-5 mt-1 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 text-sm h-full border-gray-300 opacity-100" %>
       </div>
 
       <div class="w-1/2">
-        <%= f.label :current_password, class: "flex items-center gap-1 text-sm font-medium text-gray-700" %>
-        <%= f.password_field :current_password, autocomplete: "new-password", class: "appearance-none block w-full px-3 py-2 h-5 mt-1 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 text-sm h-full border-gray-300 opacity-100" %>
+        <%= f.label :current_password, 'Current Password', class: "flex items-center gap-1 text-sm font-medium text-gray-700" %>
+        <%= f.password_field :current_password, autocomplete: "new-password", placeholder: "**********", class: "appearance-none block w-full px-3 py-2 h-5 mt-1 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 text-sm h-full border-gray-300 opacity-100" %>
         <span class="mt-1 block leading-snug text-xs text-gray-500 font-normal">we need your current password to confirm your changes</span>
       </div>
 

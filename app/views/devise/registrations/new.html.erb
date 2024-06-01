@@ -1,29 +1,57 @@
-<h2>Sign up</h2>
+<div class="flex flex-col text-left space-y-2">
+  <div class="flex flex-col text-left space-y-1">
+    <h4 class="text-2xl text-gray-900 font-bold">Hey There!</h4>
+    <p class="text-2xl text-gray-900 font-medium tracking-wider">Let's get started  ✨
+    </p>
+  </div>
+</div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "flex flex-col space-y-4 w-full" }) do |f| %>
+  <div class="flex space-x-4 space-y-0 w-full flex-row">
+    <div class="w-full">
+      <%= f.label :firstname, "First Name *", class: "flex items-center gap-1 text-sm font-medium text-gray-700" %>
+      <div class="mt-1">
+        <%= f.text_field :firstname, required: true, placeholder: "John", class: "appearance-none block w-full px-3 py-2 border hover:border-gray-500 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-transparent focus:border-gray-900 text-sm h-10 border-gray-300 opacity-100" %>
+      </div>
+    </div>
+    <div class="w-full">
+      <%= f.label :lastname, "Last Name *", class: "flex items-center gap-1 text-sm font-medium text-gray-700" %>
+      <div class="mt-1">
+        <%= f.text_field :lastname, required: true, placeholder: "Doe", class: "appearance-none block w-full px-3 py-2 border hover:border-gray-500 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-transparent focus:border-gray-900 text-sm h-10 border-gray-300 opacity-100" %>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="w-full">
+      <%= f.label :email, "Email *", class: "flex items-center gap-1 text-sm font-medium text-gray-700" %>
+      <div class="mt-1">
+        <%= f.email_field :email, required: true, autocomplete: "email", placeholder: "name@email.com", class: "appearance-none block w-full px-3 py-2 border hover:border-gray-500 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-transparent focus:border-gray-900 text-sm h-10 border-gray-300 opacity-100" %>
+      </div>
+    </div>
+  </div>
+  <div class="flex space-x-0 md:space-y-0 space-y-4 md:space-x-4 w-full flex-col md:flex-row">
+    <div class="w-full">
+      <%= f.label :password, "Password *", class: "flex items-center gap-1 text-sm font-medium text-gray-700" %>
+      <div class="mt-1">
+        <%= f.password_field :password, required: true, autocomplete: "new-password", placeholder: "**********", class: "appearance-none block w-full px-3 py-2 border hover:border-gray-500 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-transparent focus:border-gray-900 text-sm h-10 border-gray-300 opacity-100" %>
+      </div>
+    </div>
+    <div class="w-full">
+      <%= f.label :password_confirmation, "Confirm Password *", class: "flex items-center gap-1 text-sm font-medium text-gray-700" %>
+      <div class="mt-1">
+        <%= f.password_field :password_confirmation, required: true, autocomplete: "new-password", placeholder: "**********", class: "appearance-none block w-full px-3 py-2 border hover:border-gray-500 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-transparent focus:border-gray-900 text-sm h-10 border-gray-300 opacity-100" %>
+      </div>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+  <div class="pt-4 w-full">
+    <%= f.submit "Get Started", class: "text-sm duration-200 border font-medium focus:outline-none focus:ring-2 inline-flex items-center whitespace-nowrap bg-gray-800 hover:bg-gray-900 text-white justify-center rounded-md shadow-sm border-transparent p-4 w-full" %>
   </div>
 <% end %>
 
-<%= render "devise/shared/links" %>
+<div class="flex flex-col text-left space-y-2">
+  <span class="text-sm text-gray-900 font-normal">
+    Already have an account?
+    <%= link_to "Log in", new_session_path(resource_name), class: "text-gray-500 font-medium underline" %>
+  </span>
+</div>

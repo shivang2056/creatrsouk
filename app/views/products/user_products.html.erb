@@ -4,7 +4,7 @@
       <div>
         <%= form_with(url: my_products_url, method: "get", local: true, class: "flex") do %>
           <%= text_field_tag :query, params[:query], placeholder: "Search products...", class: "rounded-l-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-1 px-4 bg-white text-gray-700 placeholder-gray-400 shadow text-base focus:outline-none" %>
-          <%= button_tag class: "text-sm bg-gray-700 hover:bg-gray-900 text-white py-2 px-2 rounded-r-lg" do %>
+          <%= button_tag class: "text-sm bg-gray-800 hover:bg-gray-900 text-white py-2 px-2 rounded-r-lg" do %>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
             </svg>
