@@ -1,28 +1,18 @@
-<%= form_with(model: product, class: "space-y-4") do |form| %>
-  <% if product.errors.any? %>
-    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-      <strong class="font-bold">Oops!</strong>
-      <span class="block sm:inline"><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</span>
-      <ul class="list-disc list-inside">
-        <% product.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= form_with(model: product, class: "space-y-4 w-1/2") do |form| %>
+  <%= render "shared/error_messages", resource: product %>
 
-  <div class="w-1/2">
+  <div>
     <%= form.label :name, class: "flex items-center gap-1 text-sm font-medium text-gray-700" %>
     <%= form.text_field :name, class: "appearance-none block w-full px-3 py-2 h-5 mt-1 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 text-sm h-full border-gray-300 opacity-100" %>
   </div>
 
-  <div class="w-1/2">
+  <div>
     <%= form.label :description, class: "flex items-center gap-1 text-sm font-medium text-gray-700" %>
     <%= form.text_area :description, class: "appearance-none block w-full px-3 py-2 h-5 mt-1 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 text-sm h-full border-gray-300 opacity-100", rows: 10 %>
     <span class="mt-2 block leading-snug text-xs text-gray-500 font-normal">Recommended length: between 10 and 500 characters</span>
   </div>
 
-  <div class="w-1/2">
+  <div>
     <%= form.label :price, class: "flex items-center gap-1 text-sm font-medium text-gray-700" %>
     <%= form.number_field :price, class: "appearance-none block w-full px-3 py-2 h-5 mt-1 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 text-sm h-full border-gray-300 opacity-100" %>
   </div>
@@ -44,7 +34,7 @@
     <%= form.label :active, class: "-ml-3 block text-sm font-medium text-gray-700" %>
   </label>
 
-  <div class="w-1/2">
+  <div>
     <%= form.label :image, class: "flex items-center gap-1 text-sm font-medium text-gray-700" %>
     <%= form.file_field :image, class: "appearance-none block w-full px-3 py-2 h-5 mt-1 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 text-sm h-full border-gray-300 opacity-100" %>
   </div>

@@ -9,3 +9,6 @@ application.register("hello", HelloController)
 
 import TabController from "./tab_controller"
 application.register("tab", TabController)
+
+import ToastController from "./toast_controller"
+application.register("toast", ToastController)

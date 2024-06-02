@@ -1,4 +1,6 @@
 <%= render layout: "shared/settings" do %>
+  <%= render "shared/notification" %>
+
   <div class="transition-all border border-gray-200 rounded-md bg-white p-4 mt-12">
     <div class="flex flex-col gap-1 w-full mb-4">
       <div class="flex items-center">
@@ -6,25 +8,25 @@
       </div>
     </div>
 
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "space-y-4" }) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "space-y-4 w-1/2" }) do |f| %>
+      <%= render "shared/error_messages", resource: resource %>
 
-      <div class="w-1/2">
+      <div>
         <%= f.label :firstname, 'First Name', class: "flex items-center gap-1 text-sm font-medium text-gray-700" %>
         <%= f.text_field :firstname, autofocus: true, class: "appearance-none block w-full px-3 py-2 h-5 mt-1 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 text-sm h-full border-gray-300 opacity-100" %>
       </div>
 
-      <div class="w-1/2">
+      <div>
         <%= f.label :lastname, 'Last Name', class: "flex items-center gap-1 text-sm font-medium text-gray-700" %>
         <%= f.text_field :lastname, class: "appearance-none block w-full px-3 py-2 h-5 mt-1 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 text-sm h-full border-gray-300 opacity-100" %>
       </div>
 
-      <div class="w-1/2">
+      <div>
         <%= f.label :email, class: "flex items-center gap-1 text-sm font-medium text-gray-700" %>
         <%= f.email_field :email, autocomplete: "email", class: "appearance-none block w-full px-3 py-2 h-5 mt-1 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 text-sm h-full border-gray-300 opacity-100" %>
       </div>
 
-      <div class="w-1/2">
+      <div>
         <div class="flex">
           <%= f.label :password, class: "flex items-center gap-1 text-sm font-medium text-gray-700" %>
           <span class="ml-2 mt-1 inline leading-snug text-xs text-gray-500 font-normal">leave blank if you don't want to change it</span>
@@ -35,12 +37,12 @@
         <% end %>
       </div>
 
-      <div class="w-1/2">
+      <div>
         <%= f.label :password_confirmation, 'Password Confirmation', class: "flex items-center gap-1 text-sm font-medium text-gray-700" %>
         <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "**********", class: "appearance-none block w-full px-3 py-2 h-5 mt-1 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 text-sm h-full border-gray-300 opacity-100" %>
       </div>
 
-      <div class="w-1/2">
+      <div>
         <%= f.label :current_password, 'Current Password', class: "flex items-center gap-1 text-sm font-medium text-gray-700" %>
         <%= f.password_field :current_password, autocomplete: "new-password", placeholder: "**********", class: "appearance-none block w-full px-3 py-2 h-5 mt-1 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 text-sm h-full border-gray-300 opacity-100" %>
         <span class="mt-1 block leading-snug text-xs text-gray-500 font-normal">we need your current password to confirm your changes</span>

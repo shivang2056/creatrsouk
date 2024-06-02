@@ -4,10 +4,16 @@ class ApplicationController < ActionController::Base
   layout :layout_by_resource
 
   def layout_by_resource
-    if devise_controller? && resource_name == :user && !(controller_name == "registrations" && action_name == "edit")
+    if devise_action?
       "devise"
     else
       "application"
     end
+  end
+
+  private
+
+  def devise_action?
+    devise_controller? && resource_name == :user && !(controller_name == "registrations" && action_name == "edit")
   end
 end
