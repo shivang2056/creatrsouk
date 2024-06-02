@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :products
+
   devise_for :users, controllers: { registrations: 'users/registrations' }
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -10,13 +10,14 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  get "dashboard" => "home#index", as: :dashboard
+  resources :products do
+    get "my_products", to: "products#user_products", on: :collection
+    get "discover", to: "products#index", on: :collection
+  end
 
-  get "my_products" => "products#user_products", as: :my_products
-  get "discover" => "products#index", as: :discover
+  resources :user_purchases, only: [:index, :create]
 
-  get "my_purchases" => "user_purchases#index", as: :my_purchases
-  post 'buy_now' => 'user_purchases#create', as: :buy_now
+  resource :account, only: [:show, :create]
 
   devise_scope :user do
     get "my_profile" => "devise/registrations#edit", as: :my_profile
@@ -24,7 +25,5 @@ Rails.application.routes.draw do
 
   post '/webhooks/:source', to: 'webhooks#create'
 
-  resource :account, only: [:show, :create]
-
-  root "home#index"
+  root "products#index"
 end

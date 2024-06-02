@@ -1,19 +1,19 @@
 module ApplicationHelper
 
-  def my_products_link_text_color
-    action_name == "user_products" ? "text-blue-600" : "text-gray-500"
+  def created_products_tab_color
+    current_page?(my_products_products_path) ? "bg-white shadow" : "hover:bg-gray-300"
   end
 
-  def my_purchases_link_text_color
-    controller_name == 'user_purchases' && action_name == "index" ? "text-blue-600" : "text-gray-500"
+  def bought_products_tab_color
+    current_page?(user_purchases_path) ? "bg-white shadow" : "hover:bg-gray-300"
   end
 
-  def profile_settings_link_text_color
-    controller_name == 'registrations' && action_name == "edit" ? "text-blue-600" : "text-gray-500"
+  def account_settings_tab_color
+    current_page?(account_path) ? "bg-white shadow" : "hover:bg-gray-300"
   end
 
-  def account_settings_link_text_color
-    controller_name == 'accounts' && action_name == "show" ? "text-blue-600" : "text-gray-500"
+  def profile_settings_tab_color
+    current_page?(my_profile_path) ? "bg-white shadow" : "hover:bg-gray-300"
   end
 
   def product_created_by_current_user?

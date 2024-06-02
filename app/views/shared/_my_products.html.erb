@@ -4,11 +4,11 @@
     <p class="text-base text-gray-500 font-medium">Here's your products history</p>
   </div>
   <div class="flex space-x-1 rounded-lg p-1.5 bg-gray-200" data-controller="tab">
-    <%= link_to "Created", my_products_path,
-          class: "rounded-md py-2 px-12 text-sm font-medium ring-white ring-opacity-60 ring-offset-2 ring-offset-white focus:outline-none bg-white shadow",
+    <%= link_to "Created", my_products_products_path,
+          class: "rounded-md py-2 px-12 text-sm font-medium ring-white ring-opacity-60 ring-offset-2 ring-offset-white focus:outline-none #{created_products_tab_color}",
           data: { turbo_frame: "tab_content", action: "click->tab#switch", tab_target: "link" } %>
-    <%= link_to "Bought", my_purchases_path,
-          class: "rounded-md py-2 px-12 text-sm font-medium ring-white ring-opacity-60 ring-offset-2 ring-offset-white focus:outline-none hover:bg-gray-300",
+    <%= link_to "Bought", user_purchases_path,
+          class: "rounded-md py-2 px-12 text-sm font-medium ring-white ring-opacity-60 ring-offset-2 ring-offset-white focus:outline-none #{bought_products_tab_color}",
           data: { turbo_frame: "tab_content", action: "click->tab#switch", tab_target: "link" } %>
   </div>
   <div>

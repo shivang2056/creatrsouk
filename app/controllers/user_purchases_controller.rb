@@ -11,7 +11,7 @@ class UserPurchasesController < ApplicationController
     checkout_session = Stripe::Checkout::Session.create({
       customer_email: current_user.email,
       mode: 'payment',
-      success_url: my_purchases_url,
+      success_url: user_purchases_url,
       cancel_url: product_url(product),
       line_items: [{
         price: product.stripe_price_id,
