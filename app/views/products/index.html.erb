@@ -1,4 +1,4 @@
-<div class="flex justify-between items-center mb-20 ">
+<div class="flex justify-between items-center mb-20">
   <div class="flex flex-col text-left space-y-1 justify-between">
     <h4 class="text-2xl text-gray-900 font-bold">🔍 Discover</h4>
     <p class="text-base text-gray-500 font-medium">Explore a World of Unique Products</p>
@@ -18,6 +18,8 @@
 
 <div class="flex flex-wrap -m-4">
   <% @products.each do |product| %>
-    <%= render "card", product: product %>
+    <div class="p-4 w-1/4 mt-12">
+      <%= render "card", product: product, product_page_path: product_path(product) %>
+    </div>
   <% end %>
 </div>

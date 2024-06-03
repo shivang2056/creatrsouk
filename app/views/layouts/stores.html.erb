@@ -13,7 +13,7 @@
   <body>
     <%= render "shared/notification" %>
 
-    <div class="min-h-screen" style="background-color: <%= @store.background_color || '#f3f4f6' %>;">
+    <div class="min-h-screen p-10" style="background-color: <%= @store.background_color || '#f3f4f6' %>;">
       <%= yield %>
     </div>
   </body>

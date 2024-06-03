@@ -1,7 +1,9 @@
 <%= render layout: "shared/my_products" do %>
   <div class="flex flex-wrap -m-4">
     <% @bought_products.each do |product| %>
-      <%= render "products/card", product: product %>
+      <div class="p-4 w-1/4 mt-12">
+        <%= render "products/card", product: product, product_page_path: product_path(product) %>
+      </div>
     <% end %>
   </div>
 <% end %>
