@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  subdomain: MyString
+  background_color: MyString
+  highlight_color: MyString
+  user: one
+
+two:
+  subdomain: MyString
+  background_color: MyString
+  highlight_color: MyString
+  user: two

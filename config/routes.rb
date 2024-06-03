@@ -1,3 +1,5 @@
+require 'constraints/subdomain_constraint'
+
 Rails.application.routes.draw do
 
   devise_for :users, controllers: { registrations: 'users/registrations' }
@@ -7,8 +9,12 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+  constraints SubdomainConstraint do
+    scope module: :stores do
+      resources :products, only: [:index, :show], as: :store_products
+      root to: 'products#index', as: 'store_root'
+    end
+  end
 
   resources :products do
     get "my_products", to: "products#user_products", on: :collection
@@ -16,8 +22,8 @@ Rails.application.routes.draw do
   end
 
   resources :user_purchases, only: [:index, :create]
-
   resource :account, only: [:show, :create]
+  resource :store, only: [:show, :update]
 
   devise_scope :user do
     get "my_profile" => "devise/registrations#edit", as: :my_profile

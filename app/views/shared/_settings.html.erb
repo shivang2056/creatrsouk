@@ -7,6 +7,9 @@
     <%= link_to "Account", account_path,
           class: "rounded-md py-2 px-12 text-sm font-medium ring-white ring-opacity-60 ring-offset-2 ring-offset-white focus:outline-none #{account_settings_tab_color}",
           data: { turbo_frame: "tab_content", action: "click->tab#switch", tab_target: "link" } %>
+    <%= link_to "Store", store_path,
+          class: "rounded-md py-2 px-12 text-sm font-medium ring-white ring-opacity-60 ring-offset-2 ring-offset-white focus:outline-none #{store_settings_tab_color}",
+          data: { turbo_frame: "tab_content", action: "click->tab#switch", tab_target: "link" } %>
     <%= link_to "Profile", my_profile_path,
           class: "rounded-md py-2 px-12 text-sm font-medium ring-white ring-opacity-60 ring-offset-2 ring-offset-white focus:outline-none #{profile_settings_tab_color}",
           data: { turbo_frame: "tab_content", action: "click->tab#switch", tab_target: "link" } %>

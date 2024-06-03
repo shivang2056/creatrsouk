@@ -12,6 +12,10 @@ module ApplicationHelper
     current_page?(account_path) ? "bg-white shadow" : "hover:bg-gray-300"
   end
 
+  def store_settings_tab_color
+    current_page?(store_path) ? "bg-white shadow" : "hover:bg-gray-300"
+  end
+
   def profile_settings_tab_color
     current_page?(my_profile_path) ? "bg-white shadow" : "hover:bg-gray-300"
   end
