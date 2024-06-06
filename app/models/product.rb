@@ -11,4 +11,6 @@ class Product < ApplicationRecord
   has_one_attached :image do |image|
     image.variant :card, resize_to_limit: [350, 240]
   end
+
+  has_many :attachments
 end

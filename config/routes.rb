@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   resources :products do
     get "my_products", to: "products#user_products", on: :collection
     get "discover", to: "products#index", on: :collection
+
+    resources :attachments, only: [:index, :create, :destroy]
   end
 
   resources :user_purchases, only: [:index, :create]

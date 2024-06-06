@@ -1,14 +1,14 @@
 <% if user_signed_in? %>
   <div class="flex flex-col w-56 h-screen fixed top-0 left-0 bg-white overflow-y-auto z-30 border-r border-gray-200 shadow-gray-800">
     <div class="flex flex-col pt-5 pb-4 overflow-y-auto">
-      <div class="flex items-center flex-shrink-0 px-8 pb-4 border-b border-gray-200">
+      <div class="flex items-center flex-shrink-0 text-lg px-8 pb-4 border-b border-gray-200">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7 mr-1">
           <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 21v-7.5a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349M3.75 21V9.349m0 0a3.001 3.001 0 0 0 3.75-.615A2.993 2.993 0 0 0 9.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 0 0 2.25 1.016c.896 0 1.7-.393 2.25-1.015a3.001 3.001 0 0 0 3.75.614m-16.5 0a3.004 3.004 0 0 1-.621-4.72l1.189-1.19A1.5 1.5 0 0 1 5.378 3h13.243a1.5 1.5 0 0 1 1.06.44l1.19 1.189a3 3 0 0 1-.621 4.72M6.75 18h3.75a.75.75 0 0 0 .75-.75V13.5a.75.75 0 0 0-.75-.75H6.75a.75.75 0 0 0-.75.75v3.75c0 .414.336.75.75.75Z" />
         </svg>
         <span class="font-semibold">CreatrSouk</span>
       </div>
       <div class="mt-5 flex-1 px-2 space-y-1 pb-4 border-b border-gray-200">
-        <%= link_to discover_products_path, class: "flex space-x-1.5 items-center px-4 py-2 text-sm font-medium rounded-md" +
+        <%= link_to discover_products_path, class: "flex space-x-1.5 items-center px-4 py-2 text-base font-medium rounded-md" +
                 ((current_page?(discover_products_path) || current_page?(root_path)) ? " bg-gray-200 text-gray-800" : " hover:bg-gray-200 hover:text-gray-800 text-gray-500") do %>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22" fill="currentColor" class="w-5 h-4">
             <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clip-rule="evenodd" />
@@ -16,7 +16,7 @@
           <span>Discover</span>
         <% end %>
 
-        <%= link_to my_products_products_path, class: "flex space-x-1.5 items-center px-4 py-2 text-sm font-medium rounded-md" +
+        <%= link_to my_products_products_path, class: "flex space-x-1.5 items-center px-4 py-2 text-base font-medium rounded-md" +
                 (current_page?(my_products_products_path) ? " bg-gray-200 text-gray-800" : " hover:bg-gray-200 hover:text-gray-800 text-gray-500") do %>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22" fill="currentColor" class="w-5 h-4">
             <path fill-rule="evenodd" d="M1.5 9.832v1.793c0 1.036.84 1.875 1.875 1.875h17.25c1.035 0 1.875-.84 1.875-1.875V9.832a3 3 0 0 0-.722-1.952l-3.285-3.832A3 3 0 0 0 16.215 3h-8.43a3 3 0 0 0-2.278 1.048L2.222 7.88A3 3 0 0 0 1.5 9.832ZM7.785 4.5a1.5 1.5 0 0 0-1.139.524L3.881 8.25h3.165a3 3 0 0 1 2.496 1.336l.164.246a1.5 1.5 0 0 0 1.248.668h2.092a1.5 1.5 0 0 0 1.248-.668l.164-.246a3 3 0 0 1 2.496-1.336h3.165l-2.765-3.226a1.5 1.5 0 0 0-1.139-.524h-8.43Z" clip-rule="evenodd" />
@@ -27,7 +27,7 @@
       </div>
 
       <div class="mt-5 flex-1 px-2 space-y-1 pb-4 border-b border-gray-200">
-        <%= link_to account_path, class: "flex space-x-1.5 items-center px-4 py-2 text-sm font-medium rounded-md" +
+        <%= link_to account_path, class: "flex space-x-1.5 items-center px-4 py-2 text-base font-medium rounded-md" +
                 (current_page?(account_path) ? " bg-gray-200 text-gray-800" : " hover:bg-gray-200 hover:text-gray-800 text-gray-500") do %>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22" fill="currentColor" class="w-5 h-4">
             <path fill-rule="evenodd" d="M11.828 2.25c-.916 0-1.699.663-1.85 1.567l-.091.549a.798.798 0 0 1-.517.608 7.45 7.45 0 0 0-.478.198.798.798 0 0 1-.796-.064l-.453-.324a1.875 1.875 0 0 0-2.416.2l-.243.243a1.875 1.875 0 0 0-.2 2.416l.324.453a.798.798 0 0 1 .064.796 7.448 7.448 0 0 0-.198.478.798.798 0 0 1-.608.517l-.55.092a1.875 1.875 0 0 0-1.566 1.849v.344c0 .916.663 1.699 1.567 1.85l.549.091c.281.047.508.25.608.517.06.162.127.321.198.478a.798.798 0 0 1-.064.796l-.324.453a1.875 1.875 0 0 0 .2 2.416l.243.243c.648.648 1.67.733 2.416.2l.453-.324a.798.798 0 0 1 .796-.064c.157.071.316.137.478.198.267.1.47.327.517.608l.092.55c.15.903.932 1.566 1.849 1.566h.344c.916 0 1.699-.663 1.85-1.567l.091-.549a.798.798 0 0 1 .517-.608 7.52 7.52 0 0 0 .478-.198.798.798 0 0 1 .796.064l.453.324a1.875 1.875 0 0 0 2.416-.2l.243-.243c.648-.648.733-1.67.2-2.416l-.324-.453a.798.798 0 0 1-.064-.796c.071-.157.137-.316.198-.478.1-.267.327-.47.608-.517l.55-.091a1.875 1.875 0 0 0 1.566-1.85v-.344c0-.916-.663-1.699-1.567-1.85l-.549-.091a.798.798 0 0 1-.608-.517 7.507 7.507 0 0 0-.198-.478.798.798 0 0 1 .064-.796l.324-.453a1.875 1.875 0 0 0-.2-2.416l-.243-.243a1.875 1.875 0 0 0-2.416-.2l-.453.324a.798.798 0 0 1-.796.064 7.462 7.462 0 0 0-.478-.198.798.798 0 0 1-.517-.608l-.091-.55a1.875 1.875 0 0 0-1.85-1.566h-.344ZM12 15.75a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Z" clip-rule="evenodd" />
@@ -36,7 +36,7 @@
         <% end %>
 
         <%= link_to destroy_user_session_path, data: { turbo_method: :delete },
-              class: "flex space-x-1.5 items-center px-4 py-2 text-sm font-medium rounded-md hover:bg-gray-200 hover:text-gray-800 text-gray-500" do %>
+              class: "flex space-x-1.5 items-center px-4 py-2 text-base font-medium rounded-md hover:bg-gray-200 hover:text-gray-800 text-gray-500" do %>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22" fill="currentColor" class="w-5 h-4">
             <path fill-rule="evenodd" d="M7.5 3.75A1.5 1.5 0 0 0 6 5.25v13.5a1.5 1.5 0 0 0 1.5 1.5h6a1.5 1.5 0 0 0 1.5-1.5V15a.75.75 0 0 1 1.5 0v3.75a3 3 0 0 1-3 3h-6a3 3 0 0 1-3-3V5.25a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3V9A.75.75 0 0 1 15 9V5.25a1.5 1.5 0 0 0-1.5-1.5h-6Zm5.03 4.72a.75.75 0 0 1 0 1.06l-1.72 1.72h10.94a.75.75 0 0 1 0 1.5H10.81l1.72 1.72a.75.75 0 1 1-1.06 1.06l-3-3a.75.75 0 0 1 0-1.06l3-3a.75.75 0 0 1 1.06 0Z" clip-rule="evenodd" />
           </svg>
@@ -47,16 +47,16 @@
 
     <div class="mt-auto flex flex-row space-x-1.5 ps-4 p-4">
       <div class="flex items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-gray-500">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 text-gray-500">
           <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
         </svg>
       </div>
 
       <div class="w-36">
-        <div class="text-sm font-semibold text-gray-800 truncate">
+        <div class="text-lg font-semibold text-gray-800 truncate">
           <%= current_user.full_name %>
         </div>
-        <div class="text-xs text-gray-500 truncate">
+        <div class="text-sm leading-3 text-gray-500 truncate">
           <%= current_user.email %>
         </div>
       </div>

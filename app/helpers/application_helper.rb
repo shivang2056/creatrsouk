@@ -20,6 +20,14 @@ module ApplicationHelper
     current_page?(my_profile_path) ? "bg-white shadow" : "hover:bg-gray-300"
   end
 
+  def edit_product_tab_color
+    current_page?(edit_product_path(@product)) ? "bg-white shadow" : "hover:bg-gray-300"
+  end
+
+  def product_attachments_tab_color
+    current_page?(product_attachments_path(@product)) ? "bg-white shadow" : "hover:bg-gray-300"
+  end
+
   def product_created_by_current_user?
     current_user.products.any?(@product)
   end
