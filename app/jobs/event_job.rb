@@ -38,11 +38,13 @@ class EventJob < ApplicationJob
     return if session.payment_status != 'paid'
 
     product = Product.find_by(stripe_id: session.line_items.data[0].price.product)
-    customer = User.find_by_email(session.customer_details.email)
+    customer = User.find_or_initialize_by(email: session.customer_details.email)
 
-    if customer.present?
-      customer.purchases.create(product: product, price: product.price)
-    end
+    customer.update!(customer: true, password: SecureRandom.uuid) unless customer.persisted?
+
+    customer.purchases.create(product: product,
+      price: product.price,
+      checkout_session_id: session.id)
 
     payment_intent = Stripe::PaymentIntent.retrieve({
       id: session.payment_intent
