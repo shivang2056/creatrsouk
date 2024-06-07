@@ -63,11 +63,6 @@ class ProductsController < ApplicationController
     @products = current_user.products.with_name(params[:query]).includes(:financial)
   end
 
-  def bought_products
-    @bought_products = Product.limit(5)
-    render :user_products
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product

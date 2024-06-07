@@ -2,7 +2,18 @@ module Stores
   class CheckoutsController < BaseController
 
     def show
-      render
+      # @product = Product.find(890040135)
+      user_purchase = UserPurchase.find_by_checkout_session_id(params[:session_id])
+      @product = user_purchase.product
+
+      checkout_session = Stripe::Checkout::Session.retrieve({
+        id: params[:session_id],
+        expand: ['payment_intent.latest_charge']
+      }, {
+        stripe_account: @product.user.account.stripe_id
+      })
+
+      @receipt_url = checkout_session.payment_intent.latest_charge.receipt_url
     end
 
     def create

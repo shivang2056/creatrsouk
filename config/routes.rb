@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     resources :attachments, only: [:index, :create, :destroy]
   end
 
-  resources :user_purchases, only: [:index, :create]
+  resources :user_purchases, only: [:index, :create, :show]
   resource :account, only: [:show, :create]
   resource :store, only: [:show, :update]
 

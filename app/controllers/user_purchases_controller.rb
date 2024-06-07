@@ -1,7 +1,7 @@
 class UserPurchasesController < ApplicationController
 
   def index
-    @bought_products = current_user.purchases.map(&:product)
+    @user_purchases = current_user.purchases.includes(:product)
   end
 
   def create
@@ -22,5 +22,22 @@ class UserPurchasesController < ApplicationController
     })
 
     redirect_to checkout_session.url, allow_other_host: true, status: :see_other
+  end
+
+  def show
+    user_purchase = UserPurchase.find(params[:id])
+    # user_purchase = UserPurchase.find(1013815665)
+    @product = user_purchase.product
+
+    if @product.user&.account&.stripe_id.present?
+      checkout_session = Stripe::Checkout::Session.retrieve({
+        id: user_purchase.checkout_session_id,
+        expand: ['payment_intent.latest_charge']
+      }, {
+        stripe_account: @product.user.account&.stripe_id
+      })
+
+      @receipt_url = checkout_session.payment_intent.latest_charge.receipt_url
+    end
   end
 end
