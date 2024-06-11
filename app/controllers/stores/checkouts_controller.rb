@@ -5,16 +5,10 @@ module Stores
       user_purchase = UserPurchase
                         .includes(product: [:user, attachments: [file_attachment: :blob]])
                         .find_by_checkout_session_id(params[:session_id])
+
       @product = user_purchase.product
 
-      checkout_session = Stripe::Checkout::Session.retrieve({
-        id: params[:session_id],
-        expand: ['payment_intent.latest_charge']
-      }, {
-        stripe_account: @product.user.account.stripe_id
-      })
-
-      @receipt_url = checkout_session.payment_intent.latest_charge.receipt_url
+      @receipt_url = user_purchase.receipt_url
     end
 
     def create

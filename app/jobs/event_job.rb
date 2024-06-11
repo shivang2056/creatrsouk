@@ -8,6 +8,8 @@ class EventJob < ApplicationJob
     end
   end
 
+  private
+
   def handle_stripe_event(event)
     stripe_event = Stripe::Event.construct_from(event.data)
 
@@ -30,36 +32,40 @@ class EventJob < ApplicationJob
   end
 
   def handle_checkout_session_completed(stripe_event)
-    session = Stripe::Checkout::Session.retrieve({
-      id: stripe_event.data.object.id,
-      expand: ['line_items']
-    }, header(stripe_event))
+    session = retrieve_stripe_checkout_session(stripe_event)
 
     return if session.payment_status != 'paid'
 
     product = Product.find_by(stripe_id: session.line_items.data[0].price.product)
+
+    update_customer_purchases(session, product)
+    update_product_financials(session, product)
+  end
+
+  def retrieve_stripe_checkout_session(stripe_event)
+    Stripe::Checkout::Session.retrieve({
+      id: stripe_event.data.object.id,
+      expand: ['line_items', 'payment_intent.latest_charge.balance_transaction']
+    }, header(stripe_event))
+  end
+
+  def update_customer_purchases(session, product)
     customer = User.find_or_initialize_by(email: session.customer_details.email)
 
     customer.update!(customer: true, password: SecureRandom.uuid) unless customer.persisted?
 
     customer.purchases.create(product: product,
       price: product.price,
-      checkout_session_id: session.id)
+      checkout_session_id: session.id,
+      receipt_url: session.payment_intent.latest_charge.receipt_url
+    )
+  end
 
-    payment_intent = Stripe::PaymentIntent.retrieve({
-      id: session.payment_intent
-      }, header(stripe_event))
-
-    latest_charge = Stripe::Charge.retrieve({
-      id: payment_intent.latest_charge
-      }, header(stripe_event))
-
-    balance_transaction = Stripe::BalanceTransaction.retrieve({
-      id: latest_charge.balance_transaction
-      }, header(stripe_event))
+  def update_product_financials(session, product)
+    net_amount = session.payment_intent.latest_charge.balance_transaction.net
 
     financial = product.financial || product.build_financial(user: product.user, sales: 0, revenue: 0)
-    financial.revenue += ( balance_transaction.net / 100.00)
+    financial.revenue += ( net_amount / 100.00)
     financial.sales += 1
     financial.save!
   end
