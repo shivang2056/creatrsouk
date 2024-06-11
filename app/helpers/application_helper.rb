@@ -29,7 +29,7 @@ module ApplicationHelper
   end
 
   def product_created_by_current_user?
-    current_user.products.any?(@product)
+    @product.user_id == current_user.id
   end
 
   def product_bought_by_current_user?

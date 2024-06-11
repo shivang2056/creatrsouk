@@ -2,8 +2,9 @@ module Stores
   class CheckoutsController < BaseController
 
     def show
-      # @product = Product.find(890040135)
-      user_purchase = UserPurchase.find_by_checkout_session_id(params[:session_id])
+      user_purchase = UserPurchase
+                        .includes(product: [:user, attachments: [file_attachment: :blob]])
+                        .find_by_checkout_session_id(params[:session_id])
       @product = user_purchase.product
 
       checkout_session = Stripe::Checkout::Session.retrieve({

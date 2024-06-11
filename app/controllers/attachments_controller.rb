@@ -1,9 +1,11 @@
 class AttachmentsController < ApplicationController
-  before_action :set_product
+  before_action :set_product, only: [:create, :destroy]
   before_action :set_attachment, only: [:destroy]
 
   def index
-    render
+    @product = Product
+                .includes(attachments: [file_attachment: :blob])
+                .find(params[:product_id])
   end
 
   def create

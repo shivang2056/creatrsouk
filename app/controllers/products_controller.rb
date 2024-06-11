@@ -1,25 +1,25 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: %i[ show edit update destroy ]
+  before_action :set_product, only: %i[ show edit update ]
 
-  # GET /products or /products.json
   def index
-    @products = Product.active.with_name(params[:query])
+    @products = Product
+                  .includes(:user, image_attachment: :blob)
+                  .active
+                  .with_name(params[:query])
   end
 
-  # GET /products/1 or /products/1.json
   def show
+    render
   end
 
-  # GET /products/new
   def new
     @product = Product.new
   end
 
-  # GET /products/1/edit
   def edit
+    render
   end
 
-  # POST /products or /products.json
   def create
     @product = Product.new(product_params.merge(user: current_user))
 
@@ -36,7 +36,6 @@ class ProductsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /products/1 or /products/1.json
   def update
     respond_to do |format|
       if @product.update(product_params)
@@ -49,27 +48,18 @@ class ProductsController < ApplicationController
     end
   end
 
-  # DELETE /products/1 or /products/1.json
-  def destroy
-    @product.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to products_url, notice: "Product was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
-
   def user_products
-    @products = current_user.products.with_name(params[:query]).includes(:financial)
+    @products = current_user
+                  .products
+                  .includes(:financial)
+                  .with_name(params[:query])
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_product
       @product = Product.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def product_params
       params.require(:product).permit(:name, :description, :price, :user_id, :image, :active)
     end
