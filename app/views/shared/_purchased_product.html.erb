@@ -29,9 +29,7 @@
         <%= render "attachments/card", attachment: attachment, show_delete_link: false %>
       <% end %>
     <% else %>
-      <div class="text-sm text-gray-500 border rounded-md p-4">
-        We apologize, but there are currently no attachments available for this product. We are working to provide you with more information soon. Please check back later."
-      </div>
+      <%= render "shared/announcement", message: "We apologize, but there are currently no attachments available for this product. We are working to provide you with more information soon. Please check back later." %>
     <% end %>
   </div>
 </div>

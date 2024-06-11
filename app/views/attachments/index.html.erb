@@ -11,8 +11,8 @@
         <%= render "card", attachment: attachment, show_delete_link: true %>
       <% end %>
     <% else %>
-      <div class="text-sm text-gray-500 w-1/2 border rounded-md p-4">
-        You have not added any attachments for this product yet. Please add relevant attachments to ensure your customers have all the necessary information about the product.
+      <div class="w-1/2">
+        <%= render "shared/announcement", message: "You have not added any attachments for this product yet. Please add relevant attachments to ensure your customers have all the necessary information about the product." %>
       </div>
     <% end %>
   </div>

@@ -36,6 +36,10 @@
         <%= number_to_currency(@product.price) %>
       </h1>
 
+      <% if product_already_purchased? %>
+        <%= render "shared/announcement", message: "You've already purchased this product." %>
+      <% end %>
+
       <% unless product_created_by_current_user? %>
         <%= form_with url: "/user_purchases", local: true, data: { turbo: false }, class: "flex justify-center mt-auto text-lg duration-200 border font-medium focus:outline-none focus:ring-2 inline-flex bg-white hover:bg-gray-300 text-gray-900 border-gray-900 rounded-md focus:z-10 py-2 pr-4 pl-2" do |form| %>
           <%= form.hidden_field :product_id, value: @product.id %>
