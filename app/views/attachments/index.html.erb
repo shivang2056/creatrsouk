@@ -7,8 +7,8 @@
     </div>
 
     <% if @product.attachments.present? %>
-      <% @product.attachments.each do |attachment| %>
-        <%= render "card", attachment: attachment, product: @product, show_delete_link: true %>
+      <% @attachment_decorator.attachments.each do |attachment| %>
+        <%= render "card", attachment: attachment, show_delete_link: true %>
       <% end %>
     <% else %>
       <div class="text-sm text-gray-500 w-1/2 border rounded-md p-4">

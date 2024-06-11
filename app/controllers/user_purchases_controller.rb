@@ -33,6 +33,7 @@ class UserPurchasesController < ApplicationController
     # TODO: Remove this
     # user_purchase = UserPurchase.includes(product: [:user, attachments: [file_attachment: :blob]]).find(1013815665)
     @product = user_purchase.product
+    @attachment_decorator = AttachmentDecorator.decorate(@product)
     @receipt_url = user_purchase.receipt_url
   end
 end

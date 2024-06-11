@@ -6,6 +6,8 @@ class AttachmentsController < ApplicationController
     @product = Product
                 .includes(attachments: [file_attachment: :blob])
                 .find(params[:product_id])
+
+    @attachment_decorator = AttachmentDecorator.decorate(@product)
   end
 
   def create

@@ -25,8 +25,8 @@
     </div>
 
     <% if @product.attachments.present? %>
-      <% @product.attachments.each do |attachment| %>
-        <%= render "attachments/card", attachment: attachment, product: @product, show_delete_link: false %>
+      <% @attachment_decorator.attachments.each do |attachment| %>
+        <%= render "attachments/card", attachment: attachment, show_delete_link: false %>
       <% end %>
     <% else %>
       <div class="text-sm text-gray-500 border rounded-md p-4">
