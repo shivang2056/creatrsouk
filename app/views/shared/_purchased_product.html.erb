@@ -24,8 +24,14 @@
       You have successfully purchased the product, '<span class="text-gray-900"><%= @product.name %></span>'. Please find the attachments related to your purchase below.
     </div>
 
-    <% @product.attachments.each do |attachment| %>
-      <%= render "attachments/card", attachment: attachment, product: @product, show_delete_link: false %>
+    <% if @product.attachments.present? %>
+      <% @product.attachments.each do |attachment| %>
+        <%= render "attachments/card", attachment: attachment, product: @product, show_delete_link: false %>
+      <% end %>
+    <% else %>
+      <div class="text-sm text-gray-500 border rounded-md p-4">
+        We apologize, but there are currently no attachments available for this product. We are working to provide you with more information soon. Please check back later."
+      </div>
     <% end %>
   </div>
 </div>
