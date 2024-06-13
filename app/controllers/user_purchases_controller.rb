@@ -27,7 +27,7 @@ class UserPurchasesController < ApplicationController
   end
 
   def show
-    user_purchase = UserPurchase
+    user_purchase = current_user.purchases
                       .includes(product: [:user, attachments: [file_attachment: :blob]])
                       .find(params[:id])
     # TODO: Remove this

@@ -4,7 +4,6 @@ module Stores
       @products = @store.products
                         .includes(:user, image_attachment: :blob)
                         .active
-                        .with_name(params[:query])
     end
 
     def show

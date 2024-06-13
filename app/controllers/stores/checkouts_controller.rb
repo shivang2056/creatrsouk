@@ -7,7 +7,7 @@ module Stores
                         .find_by_checkout_session_id(params[:session_id])
 
       @product = user_purchase.product
-
+      @attachment_decorator = AttachmentDecorator.decorate(@product)
       @receipt_url = user_purchase.receipt_url
     end
 
