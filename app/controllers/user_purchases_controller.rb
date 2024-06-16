@@ -27,13 +27,13 @@ class UserPurchasesController < ApplicationController
   end
 
   def show
-    user_purchase = current_user.purchases
+    @user_purchase = current_user.purchases
                       .includes(product: [:user, attachments: [file_attachment: :blob]])
                       .find(params[:id])
     # TODO: Remove this
-    # user_purchase = UserPurchase.includes(product: [:user, attachments: [file_attachment: :blob]]).find(1013815665)
-    @product = user_purchase.product
+    # @user_purchase = UserPurchase.includes(product: [:user, attachments: [file_attachment: :blob]]).find(1013815665)
+    @product = @user_purchase.product
     @attachment_decorator = AttachmentDecorator.decorate(@product)
-    @receipt_url = user_purchase.receipt_url
+    @receipt_url = @user_purchase.receipt_url
   end
 end

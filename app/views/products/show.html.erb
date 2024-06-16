@@ -19,7 +19,7 @@
   <% end %>
 </div>
 
-<div class="w-[850px] mx-auto flex flex-col bg-white shadow-xl p-6 rounded-xl ">
+<div class="w-[850px] mx-auto flex flex-col bg-white shadow-xl p-6 rounded-xl">
   <div class="flex px-4 py-4">
     <%= image_tag @product.image, class: "w-[455px] h-[640px] filter saturate-50 rounded-md", alt: @product.name %>
 
@@ -35,6 +35,10 @@
 
         <span class="text-lg underline font-light"> By <%= @product.user.full_name %> </span>
       <% end %>
+
+      <div class="mt-4">
+        <%= render "rating" %>
+      </div>
 
       <h1 class="text-4xl text-gray-900 font-semibold mt-10">
         <%= number_to_currency(@product.price) %>

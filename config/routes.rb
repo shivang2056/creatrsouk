@@ -14,6 +14,10 @@ Rails.application.routes.draw do
       resources :products, only: [:index, :show], as: :store_products
       root to: 'products#index', as: 'store_root'
       resource :checkout, only: [:show, :create], as: :store_checkout
+
+      resources :user_purchases, only: [] do
+        resources :reviews, only: [:create, :edit, :update], as: :store_review
+      end
     end
   end
 
@@ -24,7 +28,9 @@ Rails.application.routes.draw do
     resources :attachments, only: [:index, :create, :destroy]
   end
 
-  resources :user_purchases, only: [:index, :create, :show]
+  resources :user_purchases, only: [:index, :create, :show] do
+    resources :reviews, only: [:create, :edit, :update]
+  end
   resource :account, only: [:show, :create]
   resource :store, only: [:show, :update]
 

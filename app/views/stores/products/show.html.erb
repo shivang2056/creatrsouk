@@ -15,6 +15,10 @@
         <span class="text-lg underline font-light"> By <%= @product.user.full_name %> </span>
       <% end %>
 
+      <div class="mt-4">
+        <%= render "products/rating" %>
+      </div>
+
       <h1 class="text-4xl text-gray-900 font-semibold mt-10">
         <%= number_to_currency(@product.price) %>
       </h1>

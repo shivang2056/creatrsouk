@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :products
   has_many :purchases, class_name: "UserPurchase"
+  has_many :reviews, through: :purchases
   has_one :account
   has_one :store
 

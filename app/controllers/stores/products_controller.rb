@@ -8,6 +8,7 @@ module Stores
 
     def show
       @product = @store.products.find(params[:id])
+      @rating_decorator = RatingDecorator.decorate(@product)
     end
   end
 end

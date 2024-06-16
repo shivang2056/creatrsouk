@@ -3,13 +3,13 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product
-                  .includes(:user, image_attachment: :blob)
+                  .includes(:user, :reviews, image_attachment: :blob)
                   .active
                   .with_name(params[:query])
   end
 
   def show
-    render
+    @rating_decorator = RatingDecorator.decorate(@product)
   end
 
   def new
