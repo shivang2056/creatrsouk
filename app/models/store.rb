@@ -9,6 +9,7 @@ class Store < ApplicationRecord
   end
 
   def store_url
+    # TODO: Need to add host for non development env.
     if Rails.env.development?
       store_root_url(subdomain: subdomain, host: 'lvh.me', port: 3000)
     end

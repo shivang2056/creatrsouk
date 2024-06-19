@@ -36,7 +36,7 @@ class EventJob < ApplicationJob
 
     return if session.payment_status != 'paid'
 
-    product = Product.find_by(stripe_id: session.line_items.data[0].price.product)
+    product = Product.find_by(stripe_id: session.line_items.data[0].price.product.id)
 
     update_customer_purchases(session, product)
     update_product_financials(session, product)
@@ -45,7 +45,7 @@ class EventJob < ApplicationJob
   def retrieve_stripe_checkout_session(stripe_event)
     Stripe::Checkout::Session.retrieve({
       id: stripe_event.data.object.id,
-      expand: ['line_items', 'payment_intent.latest_charge.balance_transaction']
+      expand: ['line_items.data.price.product', 'payment_intent.latest_charge.balance_transaction']
     }, header(stripe_event))
   end
 

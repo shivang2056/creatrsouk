@@ -1,3 +1,12 @@
+<% content_for :coffee_widget do %>
+  <div class="relative">
+    <%= link_to new_coffee_store_checkout_url, data: { turbo_method: :get, turbo_prefetch: false }, class: "flex justify-center mt-auto text-lg duration-200 border font-medium focus:outline-none focus:ring-2 inline-flex bg-white hover:bg-gray-300 text-gray-700 border-gray-300 rounded-md shadow-md focus:z-10 py-1 pr-4 pl-2" do %>
+      <div class="text-3xl flex items-center justify-center">☕</div>
+      <div class="flex items-center justify-center pl-2">Buy me a coffee</div>
+    <% end %>
+  </div>
+<% end %>
+
 <div class="flex flex-wrap -m-4">
   <% @products.each do |product| %>
     <div class="p-4 w-1/3 mt-12">

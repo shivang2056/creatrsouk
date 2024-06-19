@@ -9,9 +9,11 @@ class UserPurchasesController < ApplicationController
   def create
     product = Product.find(create_params[:product_id])
     service = StripeCheckout.new(
-                product.user.account.stripe_id,
+                stripe_id: product.user.account.stripe_id,
                 product: product,
                 coffee_params: create_params.except(:product_id),
+                success_url: user_purchases_url,
+                cancel_url: product_url(product),
                 current_user: current_user
               )
 
@@ -34,6 +36,6 @@ class UserPurchasesController < ApplicationController
   private
 
   def create_params
-    params.permit(:product_id, :tip_name, :tip_amount, :tip_giver_name, :tip_comment)
+    params.permit(:product_id, :tip_amount, :tip_giver_name, :tip_comment)
   end
 end

@@ -13,7 +13,9 @@ Rails.application.routes.draw do
     scope module: :stores do
       resources :products, only: [:index, :show], as: :store_products
       root to: 'products#index', as: 'store_root'
-      resource :checkout, only: [:show, :create], as: :store_checkout
+      resource :checkout, only: [:show, :create], as: :store_checkout do
+        get :new_coffee, on: :collection
+      end
 
       resources :user_purchases, only: [] do
         resources :reviews, only: [:create, :edit, :update], as: :store_review

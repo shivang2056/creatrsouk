@@ -70,5 +70,7 @@
     </div>
   </div>
 
-  <%= render "buy_with_coffee" %>
+  <% if !product_created_by_current_user? && @product.user.store.buy_coffee_widget %>
+    <%= render "buy_with_coffee", checkout_path: "/user_purchases", show_tip_giver_input: false %>
+  <% end %>
 </div>

@@ -1,6 +1,13 @@
 module Stores
   class CheckoutsController < BaseController
 
+    def new_coffee
+      render turbo_stream: [
+        turbo_stream.update("modal",
+          partial: "new_coffee")
+      ]
+    end
+
     def show
       @user_purchase = UserPurchase
                         .includes(product: [:user, attachments: [file_attachment: :blob]])
@@ -12,12 +19,14 @@ module Stores
     end
 
     def create
-      product = Product.find(create_params[:product_id])
+      product = Product.find_by_id(create_params[:product_id])
 
       service = StripeCheckout.new(
-                  @store.user.account.stripe_id,
+                  stripe_id: @store.user.account.stripe_id,
                   product: product,
-                  coffee_params: create_params.except(:product_id)
+                  coffee_params: create_params.except(:product_id),
+                  success_url: store_checkout_url + "?session_id={CHECKOUT_SESSION_ID}",
+                  cancel_url: product.present? ? store_product_url(product) : store_root_url,
                 )
 
       checkout_session = service.create_session
@@ -28,7 +37,7 @@ module Stores
     private
 
     def create_params
-      params.permit(:product_id, :tip_name, :tip_amount, :tip_giver_name, :tip_comment)
+      params.permit(:product_id, :tip_amount, :tip_giver_name, :tip_comment)
     end
   end
 end

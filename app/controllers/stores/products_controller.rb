@@ -2,7 +2,7 @@ module Stores
   class ProductsController < BaseController
     def index
       @products = @store.products
-                        .includes(:user, image_attachment: :blob)
+                        .includes(:user, :reviews, image_attachment: :blob)
                         .active
     end
 

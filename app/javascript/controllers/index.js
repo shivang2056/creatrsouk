@@ -4,11 +4,17 @@
 
 import { application } from "./application"
 
+import CoffeeWidgetController from "./coffee_widget_controller"
+application.register("coffee-widget", CoffeeWidgetController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
 import RatingController from "./rating_controller"
 application.register("rating", RatingController)
+
+import RemoteModalController from "./remote_modal_controller"
+application.register("remote-modal", RemoteModalController)
 
 import TabController from "./tab_controller"
 application.register("tab", TabController)
