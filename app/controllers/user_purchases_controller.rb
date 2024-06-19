@@ -7,21 +7,15 @@ class UserPurchasesController < ApplicationController
   end
 
   def create
-    product = Product.find(params[:product_id])
-    account = product.user.account
+    product = Product.find(create_params[:product_id])
+    service = StripeCheckout.new(
+                product.user.account.stripe_id,
+                product: product,
+                coffee_params: create_params.except(:product_id),
+                current_user: current_user
+              )
 
-    checkout_session = Stripe::Checkout::Session.create({
-      customer_email: current_user.email,
-      mode: 'payment',
-      success_url: user_purchases_url,
-      cancel_url: product_url(product),
-      line_items: [{
-        price: product.stripe_price_id,
-        quantity: 1,
-      }]
-    }, {
-      stripe_account: account.stripe_id,
-    })
+    checkout_session = service.create_session
 
     redirect_to checkout_session.url, allow_other_host: true, status: :see_other
   end
@@ -35,5 +29,11 @@ class UserPurchasesController < ApplicationController
     @product = @user_purchase.product
     @attachment_decorator = AttachmentDecorator.decorate(@product)
     @receipt_url = @user_purchase.receipt_url
+  end
+
+  private
+
+  def create_params
+    params.permit(:product_id, :tip_name, :tip_amount, :tip_giver_name, :tip_comment)
   end
 end

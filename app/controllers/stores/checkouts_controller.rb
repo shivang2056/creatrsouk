@@ -12,21 +12,23 @@ module Stores
     end
 
     def create
-      product = Product.find(params[:product_id])
+      product = Product.find(create_params[:product_id])
 
-      checkout_session = Stripe::Checkout::Session.create({
-        mode: 'payment',
-        success_url: store_checkout_url + "?session_id={CHECKOUT_SESSION_ID}",
-        cancel_url: store_product_url(product),
-        line_items: [{
-          price: product.stripe_price_id,
-          quantity: 1
-        }]
-      }, {
-        stripe_account: @store.user.account.stripe_id
-      })
+      service = StripeCheckout.new(
+                  @store.user.account.stripe_id,
+                  product: product,
+                  coffee_params: create_params.except(:product_id)
+                )
+
+      checkout_session = service.create_session
 
       redirect_to checkout_session.url, allow_other_host: true, status: :see_other
+    end
+
+    private
+
+    def create_params
+      params.permit(:product_id, :tip_name, :tip_amount, :tip_giver_name, :tip_comment)
     end
   end
 end

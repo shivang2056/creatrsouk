@@ -29,6 +29,10 @@
         <%= f.color_field :highlight_color, class: "block w-full h-8 mt-1 focus:outline-none" %>
       </div>
 
+      <div class="pt-2">
+        <%= render "shared/toggle_switch", form: f, attribute: :buy_coffee_widget, label: 'Enable Coffee Widget' %>
+        <span class="block leading-snug text-xs text-gray-500 font-normal">This allows your customers to buy you a coffee</span>
+      </div>
 
       <div class="pt-8">
         <%= f.submit "Update", class: "text-sm duration-200 border font-medium focus:outline-none focus:ring-2 inline-flex items-center whitespace-nowrap bg-gray-800 hover:bg-gray-900 text-white justify-center rounded-md shadow-sm border-transparent py-2 px-4" %>

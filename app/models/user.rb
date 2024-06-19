@@ -7,6 +7,8 @@ class User < ApplicationRecord
   has_many :products
   has_many :purchases, class_name: "UserPurchase"
   has_many :reviews, through: :purchases
+  has_many :given_tips, class_name: 'Tip', foreign_key: 'giver_id'
+  has_many :received_tips, class_name: 'Tip', foreign_key: 'recipient_id'
   has_one :account
   has_one :store
 
