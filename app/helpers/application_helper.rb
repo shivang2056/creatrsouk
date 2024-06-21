@@ -4,7 +4,7 @@ module ApplicationHelper
     current_page?(my_products_products_path) ? "bg-white shadow" : "hover:bg-gray-300"
   end
 
-  def bought_products_tab_color
+  def purchases_tab_color
     current_page?(user_purchases_path) ? "bg-white shadow" : "hover:bg-gray-300"
   end
 

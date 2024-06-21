@@ -1,6 +1,4 @@
 class StripeCheckout
-  include Rails.application.routes.url_helpers
-
   attr_reader :stripe_id, :product, :coffee_params, :current_user
 
   def initialize(stripe_id:, product: nil, coffee_params: {}, success_url:, cancel_url:, current_user: nil)
