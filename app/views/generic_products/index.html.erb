@@ -19,7 +19,7 @@
 <div class="flex flex-wrap -m-4">
   <% @products.each do |product| %>
     <div class="p-4 w-1/4 mt-12">
-      <%= render "card", product: product, product_page_path: product_path(product) %>
+      <%= render "card", product: product, product_page_path: generic_product_path(product) %>
     </div>
   <% end %>
 </div>

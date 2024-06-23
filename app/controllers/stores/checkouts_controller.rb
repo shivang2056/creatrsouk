@@ -19,12 +19,12 @@ module Stores
     end
 
     def create
-      product = Product.find_by_id(create_params[:product_id])
+      product = Product.find_by_id(create_params[:generic_product_id])
 
       service = StripeCheckout.new(
                   stripe_id: @store.user.account.stripe_id,
                   product: product,
-                  coffee_params: create_params.except(:product_id),
+                  coffee_params: create_params.except(:generic_product_id),
                   success_url: store_checkout_url + "?session_id={CHECKOUT_SESSION_ID}",
                   cancel_url: product.present? ? store_product_url(product) : store_root_url,
                 )
@@ -37,7 +37,7 @@ module Stores
     private
 
     def create_params
-      params.permit(:product_id, :tip_amount, :tip_giver_name, :tip_comment)
+      params.permit(:generic_product_id, :tip_amount, :tip_giver_name, :tip_comment)
     end
   end
 end

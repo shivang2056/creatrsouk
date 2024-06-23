@@ -2,7 +2,8 @@ class Store < ApplicationRecord
   include Rails.application.routes.url_helpers
 
   belongs_to :user
-  has_many :products, through: :user
+  has_many :generic_products, through: :user
+  has_one :coffee_product, through: :user
 
   def self.find_by_request(request)
     where(subdomain: request.subdomain).first

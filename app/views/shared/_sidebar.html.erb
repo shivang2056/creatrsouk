@@ -8,8 +8,8 @@
         <span class="font-semibold">CreatrSouk</span>
       <% end %>
       <div class="mt-5 flex-1 px-2 space-y-1 pb-4 border-b border-gray-200">
-        <%= link_to discover_products_path, class: "flex space-x-1.5 items-center px-4 py-2 text-base font-medium rounded-md" +
-                ((current_page?(discover_products_path) || current_page?(root_path)) ? " bg-gray-200 text-gray-800" : " hover:bg-gray-200 hover:text-gray-800 text-gray-500") do %>
+        <%= link_to discover_generic_products_path, class: "flex space-x-1.5 items-center px-4 py-2 text-base font-medium rounded-md" +
+                ((current_page?(discover_generic_products_path) || current_page?(root_path)) ? " bg-gray-200 text-gray-800" : " hover:bg-gray-200 hover:text-gray-800 text-gray-500") do %>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22" fill="currentColor" class="w-5 h-4">
             <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clip-rule="evenodd" />
           </svg>
@@ -25,8 +25,8 @@
           <span>Library</span>
         <% end %>
 
-        <%= link_to my_products_products_path, class: "flex space-x-1.5 items-center px-4 py-2 text-base font-medium rounded-md" +
-                (current_page?(my_products_products_path) ? " bg-gray-200 text-gray-800" : " hover:bg-gray-200 hover:text-gray-800 text-gray-500") do %>
+        <%= link_to my_products_generic_products_path, class: "flex space-x-1.5 items-center px-4 py-2 text-base font-medium rounded-md" +
+                (current_page?(my_products_generic_products_path) ? " bg-gray-200 text-gray-800" : " hover:bg-gray-200 hover:text-gray-800 text-gray-500") do %>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-4">
             <path d="M21 6.375c0 2.692-4.03 4.875-9 4.875S3 9.067 3 6.375 7.03 1.5 12 1.5s9 2.183 9 4.875Z" />
             <path d="M12 12.75c2.685 0 5.19-.586 7.078-1.609a8.283 8.283 0 0 0 1.897-1.384c.016.121.025.244.025.368C21 12.817 16.97 15 12 15s-9-2.183-9-4.875c0-.124.009-.247.025-.368a8.285 8.285 0 0 0 1.897 1.384C6.809 12.164 9.315 12.75 12 12.75Z" />

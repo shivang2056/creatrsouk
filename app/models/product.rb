@@ -10,6 +10,5 @@ class Product < ApplicationRecord
   scope :with_name, ->(name) { where("name ilike '%#{name}%'") if name.present? }
   scope :active, -> { where(active: true) }
 
-  validates :name, :description, :price, presence: true
-
+  validates :name, :price, presence: true
 end

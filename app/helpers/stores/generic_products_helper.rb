@@ -1,0 +1,2 @@
+module Stores::GenericProductsHelper
+end

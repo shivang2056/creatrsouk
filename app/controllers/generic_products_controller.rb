@@ -1,8 +1,8 @@
-class ProductsController < ApplicationController
+class GenericProductsController < ApplicationController
   before_action :set_product, only: %i[ show edit update ]
 
   def index
-    @products = Product
+    @products = GenericProduct
                   .includes(:user, :reviews, image_attachment: :blob)
                   .active
                   .with_name(params[:query])
@@ -13,7 +13,7 @@ class ProductsController < ApplicationController
   end
 
   def new
-    @product = Product.new
+    @product = current_user.generic_products.new
   end
 
   def edit
@@ -21,13 +21,13 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.new(product_params.merge(user: current_user))
+    @product = current_user.generic_products.new(generic_product_params)
 
     respond_to do |format|
       if @product.save
         create_stripe_product
 
-        format.html { redirect_to edit_product_url(@product), notice: "Product was successfully created." }
+        format.html { redirect_to edit_generic_product_url(@product), notice: "Product was successfully created." }
         format.json { render :show, status: :created, location: @product }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,8 +38,8 @@ class ProductsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @product.update(product_params)
-        format.html { redirect_to edit_product_url(@product), notice: "Product was successfully updated." }
+      if @product.update(generic_product_params)
+        format.html { redirect_to edit_generic_product_url(@product), notice: "Product was successfully updated." }
         format.json { render :show, status: :ok, location: @product }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -50,7 +50,7 @@ class ProductsController < ApplicationController
 
   def user_products
     @products = current_user
-                  .products
+                  .generic_products
                   .includes(:financial)
                   .with_name(params[:query])
   end
@@ -60,8 +60,8 @@ class ProductsController < ApplicationController
       @product = Product.find(params[:id])
     end
 
-    def product_params
-      params.require(:product).permit(:name, :description, :price, :user_id, :image, :active)
+    def generic_product_params
+      params.require(:generic_product).permit(:name, :description, :price, :user_id, :image, :active)
     end
 
     def create_stripe_product

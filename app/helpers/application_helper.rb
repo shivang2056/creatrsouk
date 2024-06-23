@@ -1,7 +1,7 @@
 module ApplicationHelper
 
   def created_products_tab_color
-    current_page?(my_products_products_path) ? "bg-white shadow" : "hover:bg-gray-300"
+    current_page?(my_products_generic_products_path) ? "bg-white shadow" : "hover:bg-gray-300"
   end
 
   def purchases_tab_color
@@ -21,11 +21,11 @@ module ApplicationHelper
   end
 
   def edit_product_tab_color
-    current_page?(edit_product_path(@product)) ? "bg-white shadow" : "hover:bg-gray-300"
+    current_page?(edit_generic_product_path(@product)) ? "bg-white shadow" : "hover:bg-gray-300"
   end
 
   def product_attachments_tab_color
-    current_page?(product_attachments_path(@product)) ? "bg-white shadow" : "hover:bg-gray-300"
+    current_page?(generic_product_attachments_path(@product)) ? "bg-white shadow" : "hover:bg-gray-300"
   end
 
   def product_created_by_current_user?

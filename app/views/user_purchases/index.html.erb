@@ -2,7 +2,7 @@
   <div class="flex flex-wrap -m-4">
     <% @user_purchases.each do |purchase| %>
       <div class="p-4 w-1/4 mt-12">
-        <%= render "products/card", product: purchase.product, product_page_path: user_purchase_path(purchase), show_ratings: false %>
+        <%= render "generic_products/card", product: purchase.product, product_page_path: user_purchase_path(purchase), show_ratings: false %>
       </div>
     <% end %>
   </div>

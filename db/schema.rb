@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_17_014929) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_21_112229) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -94,6 +94,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_17_014929) do
     t.json "data"
     t.float "average_rating"
     t.integer "reviews_count"
+    t.string "type"
     t.index ["user_id"], name: "index_products_on_user_id"
   end
 
@@ -115,20 +116,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_17_014929) do
     t.datetime "updated_at", null: false
     t.boolean "buy_coffee_widget", default: false
     t.index ["user_id"], name: "index_stores_on_user_id"
-  end
-
-  create_table "tips", force: :cascade do |t|
-    t.decimal "amount"
-    t.text "comment"
-    t.string "giver_name"
-    t.bigint "giver_id"
-    t.bigint "recipient_id", null: false
-    t.bigint "user_purchase_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["giver_id"], name: "index_tips_on_giver_id"
-    t.index ["recipient_id"], name: "index_tips_on_recipient_id"
-    t.index ["user_purchase_id"], name: "index_tips_on_user_purchase_id"
   end
 
   create_table "user_purchases", force: :cascade do |t|
@@ -166,9 +153,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_17_014929) do
   add_foreign_key "product_financials", "users"
   add_foreign_key "reviews", "user_purchases"
   add_foreign_key "stores", "users"
-  add_foreign_key "tips", "user_purchases"
-  add_foreign_key "tips", "users", column: "giver_id"
-  add_foreign_key "tips", "users", column: "recipient_id"
   add_foreign_key "user_purchases", "products"
   add_foreign_key "user_purchases", "users"
 end

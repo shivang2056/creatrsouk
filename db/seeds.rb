@@ -14,7 +14,7 @@ require 'open-uri'
 puts "\n== Seeding the database with fixtures =="
 system("bin/rails db:fixtures:load")
 
-Product.all.each do |product|
+GenericProduct.all.each do |product|
   io = URI.open(Faker::LoremFlickr.grayscale_image(size: '800x800', search_terms: ['abstract']))
 
   product.image.attach({

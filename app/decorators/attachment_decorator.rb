@@ -41,6 +41,6 @@ class AttachmentDecorator
   end
 
   def attachment_delete_path(attachment)
-    product_attachment_path(@product.id, attachment.id)
+    generic_product_attachment_path(@product.id, attachment.id)
   end
 end

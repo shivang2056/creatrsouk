@@ -5,7 +5,7 @@ class AttachmentsController < ApplicationController
   def index
     @product = Product
                 .includes(attachments: [file_attachment: :blob])
-                .find(params[:product_id])
+                .find(params[:generic_product_id])
 
     @attachment_decorator = AttachmentDecorator.decorate(@product)
   end
@@ -19,7 +19,7 @@ class AttachmentsController < ApplicationController
       flash[:error] = attachment.errors.full_messages.join(', ')
     end
 
-    redirect_to product_attachments_path(@product)
+    redirect_to generic_product_attachments_path(@product)
   end
 
   def destroy
@@ -29,7 +29,7 @@ class AttachmentsController < ApplicationController
       flash[:error] = "Something went wrong. Please try again."
     end
 
-    redirect_to product_attachments_path(@product)
+    redirect_to generic_product_attachments_path(@product)
   end
 
   private
@@ -39,7 +39,7 @@ class AttachmentsController < ApplicationController
   end
 
   def set_product
-    @product = Product.find(params[:product_id])
+    @product = Product.find(params[:generic_product_id])
   end
 
   def set_attachment

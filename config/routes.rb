@@ -11,8 +11,8 @@ Rails.application.routes.draw do
 
   constraints SubdomainConstraint do
     scope module: :stores do
-      resources :products, only: [:index, :show], as: :store_products
-      root to: 'products#index', as: 'store_root'
+      resources :generic_products, only: [:index, :show], as: :store_products
+      root to: 'generic_products#index', as: 'store_root'
       resource :checkout, only: [:show, :create], as: :store_checkout do
         get :new_coffee, on: :collection
       end
@@ -23,9 +23,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :products do
-    get "my_products", to: "products#user_products", on: :collection
-    get "discover", to: "products#index", on: :collection
+  resources :generic_products do
+    get "my_products", to: "generic_products#user_products", on: :collection
+    get "discover", to: "generic_products#index", on: :collection
 
     resources :attachments, only: [:index, :create, :destroy]
   end
@@ -42,5 +42,5 @@ Rails.application.routes.draw do
 
   post '/webhooks/:source', to: 'webhooks#create'
 
-  root "products#index"
+  root "generic_products#index"
 end
