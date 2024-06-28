@@ -28,6 +28,14 @@ module ApplicationHelper
     current_page?(generic_product_attachments_path(@product)) ? "bg-white shadow" : "hover:bg-gray-300"
   end
 
+  def coffee_widget_tab_color
+    current_page?(coffee_path) ? "bg-white shadow" : "hover:bg-gray-300"
+  end
+
+  def coffee_widget_tab_color
+    current_page?(coffee_path) ? "bg-white shadow" : "hover:bg-gray-300"
+  end
+
   def product_created_by_current_user?
     @product.user_id == current_user.id
   end

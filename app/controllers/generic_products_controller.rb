@@ -25,7 +25,7 @@ class GenericProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
-        create_stripe_product
+        sync_to_stripe
 
         format.html { redirect_to edit_generic_product_url(@product), notice: "Product was successfully created." }
         format.json { render :show, status: :created, location: @product }
@@ -39,6 +39,8 @@ class GenericProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update(generic_product_params)
+        sync_to_stripe
+
         format.html { redirect_to edit_generic_product_url(@product), notice: "Product was successfully updated." }
         format.json { render :show, status: :ok, location: @product }
       else
@@ -64,7 +66,13 @@ class GenericProductsController < ApplicationController
       params.require(:generic_product).permit(:name, :description, :price, :user_id, :image, :active)
     end
 
-    def create_stripe_product
-      StripeProductJob.perform_later(@product)
+    def sync_to_stripe
+      StripeProductJob.perform_later(
+        @product,
+        options: {
+          create: @product.id_previously_changed?,
+          price_update: @product.price_previously_changed?
+        }
+      )
     end
 end

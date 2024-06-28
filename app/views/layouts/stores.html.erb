@@ -29,7 +29,7 @@
             <p class="text-base text-gray-500 font-medium">Crafted by me, Just for you</p>
           </div>
 
-          <% if @store.buy_coffee_widget %>
+          <% if @store.coffee_widget_enabled? %>
             <%= yield :coffee_widget %>
           <% end %>
         </div>

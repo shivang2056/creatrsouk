@@ -70,7 +70,7 @@
     </div>
   </div>
 
-  <% if !product_created_by_current_user? && @product.user.store.buy_coffee_widget %>
-    <%= render "buy_with_coffee", checkout_path: "/user_purchases", show_tip_giver_input: false %>
+  <% if !product_created_by_current_user? && @product.user.coffee_widget_enabled? %>
+    <%= render "buy_with_coffee", checkout_path: "/user_purchases", coffee_product: @product.user.coffee_product, show_tip_giver_input: false %>
   <% end %>
 </div>

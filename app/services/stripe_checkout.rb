@@ -4,6 +4,7 @@ class StripeCheckout
   def initialize(stripe_id:, product: nil, coffee_params: {}, success_url:, cancel_url:, current_user: nil)
     @stripe_id = stripe_id
     @product = product
+    @user = @product.user
     @coffee_params = coffee_params
     @success_url = success_url
     @cancel_url = cancel_url
@@ -13,8 +14,17 @@ class StripeCheckout
   def create_session
     payload = base_payload
 
-    payload[:line_items] << product_line_item if @product.present?
-    payload[:line_items] << coffee_line_item if @coffee_params[:tip_amount].to_i > 0
+    payload[:line_items] << line_item if @product.present?
+
+    if @coffee_params[:quantity].to_i > 0
+      payload[:metadata] = {
+        coffee: true,
+        giver_name: @coffee_params[:contributor_name],
+        comment: @coffee_params[:comment]
+      }
+
+      payload[:line_items] << line_item(coffee: true)
+    end
 
     return nil if payload[:line_items].blank?
 
@@ -23,7 +33,7 @@ class StripeCheckout
 
   def base_payload
     {
-      customer_email: @current_user && @current_user.full_name,
+      customer_email: @current_user && @current_user.email,
       mode: 'payment',
       success_url: @success_url,
       cancel_url: @cancel_url,
@@ -31,29 +41,19 @@ class StripeCheckout
     }
   end
 
-  def product_line_item
+  def line_item(coffee: false)
     {
-      price: @product.stripe_price_id,
-      quantity: 1
+      price: line_item_stripe_price_id(coffee),
+      quantity: line_item_quantity(coffee)
     }
   end
 
-  def coffee_line_item
-    {
-      price_data: {
-        currency: 'usd',
-        product_data: {
-          name: "Coffee for #{@product.user.full_name}",
-          metadata: {
-            coffee: true,
-            giver_name: @coffee_params[:tip_giver_name],
-            comment: @coffee_params[:tip_comment]
-          }
-        },
-        unit_amount: @coffee_params[:tip_amount].to_i * 100
-      },
-      quantity: 1
-    }
+  def line_item_stripe_price_id(coffee)
+    coffee ? @user.coffee_product.stripe_price_id : @product.stripe_price_id
+  end
+
+  def line_item_quantity(coffee)
+    coffee ? @coffee_params[:quantity].to_i : 1
   end
 
   def header

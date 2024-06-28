@@ -2,18 +2,19 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="coffee-widget"
 export default class extends Controller {
-  static targets = ["amountOption", "amountInput", "coffeeAmount", "totalAmount", "coffeeAmountInButton"]
-  static values = { productPrice: Number }
+  static targets = ["quantityOption", "quantityInput", "coffeeAmount", "totalAmount", "coffeeAmountInButton"]
+  static values = { productPrice: Number, coffeePrice: Number }
 
   connect() {
   }
 
   setAmount({params}) {
-    let amount = params.option || parseInt(this.amountInputTarget.value || 1)
-    let total = this.productPriceValue + amount
+    let quantity = params.quantity || parseInt(this.quantityInputTarget.value || 1)
+    let coffeeAmount = quantity * this.coffeePriceValue
+    let total = this.productPriceValue + coffeeAmount
 
-    this.amountOptionTargets.forEach((element) => {
-      if (amount === parseInt(element.dataset.coffeeWidgetOptionParam)) {
+    this.quantityOptionTargets.forEach((element) => {
+      if (quantity === parseInt(element.dataset.coffeeWidgetQuantityParam)) {
         element.classList.remove('border-gray-300')
         element.classList.add('border-gray-500')
         element.classList.add('bg-gray-300')
@@ -24,10 +25,10 @@ export default class extends Controller {
       }
     })
 
-    this.amountInputTarget.value = amount
+    this.quantityInputTarget.value = quantity
 
     if (this.hasCoffeeAmountTarget) {
-      this.coffeeAmountTarget.innerHTML = `$${amount.toFixed(2)}`
+      this.coffeeAmountTarget.innerHTML = `$${coffeeAmount.toFixed(2)}`
     }
 
     if (this.hasTotalAmountTarget) {
@@ -35,7 +36,7 @@ export default class extends Controller {
     }
 
     if (this.hasCoffeeAmountInButtonTarget) {
-      this.coffeeAmountInButtonTarget.innerHTML = `$${amount}`
+      this.coffeeAmountInButtonTarget.innerHTML = `$${coffeeAmount.toFixed(2)}`
     }
   }
 }

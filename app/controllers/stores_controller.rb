@@ -19,8 +19,7 @@ class StoresController < ApplicationController
     params.require(:store).permit(
       :subdomain,
       :background_color,
-      :highlight_color,
-      :buy_coffee_widget
+      :highlight_color
     )
   end
 

@@ -43,7 +43,7 @@
     </div>
   </div>
 
-  <% if @product.user.store.buy_coffee_widget %>
-    <%= render "generic_products/buy_with_coffee", checkout_path: "/checkout", show_tip_giver_input: true %>
+  <% if @product.user.coffee_widget_enabled? %>
+    <%= render "generic_products/buy_with_coffee", checkout_path: "/checkout", coffee_product: @store.coffee_product, show_tip_giver_input: true %>
   <% end %>
 </div>

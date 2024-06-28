@@ -5,6 +5,8 @@ class Store < ApplicationRecord
   has_many :generic_products, through: :user
   has_one :coffee_product, through: :user
 
+  delegate :coffee_widget_enabled?, to: :user
+
   def self.find_by_request(request)
     where(subdomain: request.subdomain).first
   end

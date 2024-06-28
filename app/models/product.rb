@@ -7,8 +7,9 @@ class Product < ApplicationRecord
   has_many :attachments
   has_many :reviews, through: :user_purchases
 
+  validates :name, :price, :description, presence: true
+  validates :price, numericality: { greater_than: 0 }
+
   scope :with_name, ->(name) { where("name ilike '%#{name}%'") if name.present? }
   scope :active, -> { where(active: true) }
-
-  validates :name, :price, presence: true
 end

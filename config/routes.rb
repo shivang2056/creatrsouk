@@ -33,8 +33,10 @@ Rails.application.routes.draw do
   resources :user_purchases, only: [:index, :create, :show] do
     resources :reviews, only: [:create, :edit, :update]
   end
+
   resource :account, only: [:show, :create]
   resource :store, only: [:show, :update]
+  resource :coffee, only: [:show, :update], path: "/coffee_widget"
 
   devise_scope :user do
     get "my_profile" => "devise/registrations#edit", as: :my_profile

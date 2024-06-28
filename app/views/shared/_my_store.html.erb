@@ -10,6 +10,9 @@
     <%= link_to "Settings", store_path,
           class: "rounded-md py-2 px-12 text-sm font-medium ring-white ring-opacity-60 ring-offset-2 ring-offset-white focus:outline-none #{store_settings_tab_color}",
           data: { turbo_frame: "tab_content", action: "click->tab#switch", tab_target: "link" } %>
+    <%= link_to "Coffee Widget", coffee_path,
+          class: "rounded-md py-2 px-12 text-sm font-medium ring-white ring-opacity-60 ring-offset-2 ring-offset-white focus:outline-none #{coffee_widget_tab_color}",
+          data: { turbo_frame: "tab_content", action: "click->tab#switch", tab_target: "link" } %>
   </div>
   <div>
     <%= turbo_frame_tag "tab_content" do %>
