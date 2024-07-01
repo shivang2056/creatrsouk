@@ -10,7 +10,7 @@ class UserPurchasesController < ApplicationController
   def create
     product = Product.find(create_params[:generic_product_id])
     service = StripeCheckout.new(
-                stripe_id: product.user.account.stripe_id,
+                author: product.user,
                 product: product,
                 coffee_params: create_params[:coffee_attributes],
                 success_url: user_purchases_url,

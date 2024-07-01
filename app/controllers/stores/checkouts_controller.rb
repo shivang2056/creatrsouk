@@ -23,16 +23,19 @@ module Stores
                             .coffee_purchases
                             .find_by_checkout_session_id(params[:session_id])
 
-      @product = @user_purchase.product
-      @attachment_decorator = AttachmentDecorator.decorate(@product)
-      @receipt_url = @user_purchase.receipt_url
+      @receipt_url = (@user_purchase || @coffee_purchase).receipt_url
+
+      if @user_purchase.present?
+        @product = @user_purchase.product
+        @attachment_decorator = AttachmentDecorator.decorate(@product)
+      end
     end
 
     def create
       product = Product.find_by_id(create_params[:generic_product_id])
 
       service = StripeCheckout.new(
-                  stripe_id: @store.user.account.stripe_id,
+                  author: @store.user,
                   product: product,
                   coffee_params: create_params[:coffee_attributes],
                   success_url: store_checkout_url + "?session_id={CHECKOUT_SESSION_ID}",

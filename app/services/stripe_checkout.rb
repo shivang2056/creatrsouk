@@ -1,10 +1,9 @@
 class StripeCheckout
   attr_reader :stripe_id, :product, :coffee_params, :current_user
 
-  def initialize(stripe_id:, product: nil, coffee_params: {}, success_url:, cancel_url:, current_user: nil)
-    @stripe_id = stripe_id
+  def initialize(author:, product: nil, coffee_params: {}, success_url:, cancel_url:, current_user: nil)
+    @author = author
     @product = product
-    @user = @product.user
     @coffee_params = coffee_params
     @success_url = success_url
     @cancel_url = cancel_url
@@ -49,7 +48,7 @@ class StripeCheckout
   end
 
   def line_item_stripe_price_id(coffee)
-    coffee ? @user.coffee_product.stripe_price_id : @product.stripe_price_id
+    coffee ? @author.coffee_product.stripe_price_id : @product.stripe_price_id
   end
 
   def line_item_quantity(coffee)
@@ -57,6 +56,6 @@ class StripeCheckout
   end
 
   def header
-    { stripe_account: @stripe_id }
+    { stripe_account: @author.account.stripe_id }
   end
 end

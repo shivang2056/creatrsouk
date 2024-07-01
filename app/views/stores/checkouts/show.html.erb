@@ -1,1 +1,5 @@
-<%= render "shared/purchased_product" %>
+<% if @user_purchase.present? %>
+  <%= render "shared/purchased_product" %>
+<% else %>
+  <%= render "purchased_coffee" %>
+<% end %>
