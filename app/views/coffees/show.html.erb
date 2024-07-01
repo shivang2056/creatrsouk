@@ -25,4 +25,73 @@
       </div>
     <% end %>
   </div>
+
+  <div class="transition-all border border-gray-200 rounded-md bg-white p-4 mt-4">
+    <div class="flex flex-col gap-1 w-full mb-8">
+      <div class="items-center">
+        <h1 class="text-lg pb-0.5 leading-6 font-medium text-gray-900 mr-2 flex items-center">Support Received</h1>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500">Breakdown of Contributions</p>
+      </div>
+    </div>
+
+    <div class="w-1/2 flex justify-between text-sm py-4 border-y border-gray-200">
+      <div class="pl-2">
+        <div class="text-gray-900 font-medium">
+          Contributions Count
+        </div>
+
+        <div class="text-gray-500 pt-4">
+          <%= @coffee_widget.financial.sales %>
+        </div>
+      </div>
+
+      <div class="pr-2">
+        <div class="text-gray-900 font-medium">
+          Total Contributions Amount
+        </div>
+
+        <div class="text-gray-500 pt-4">
+          <%= number_to_currency(@coffee_widget.financial.revenue) %>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-1 w-full mt-16">
+      <div class="flex items-center">
+        <h1 class="text-base pb-0.5 leading-6 font-medium text-gray-900 mr-2 flex items-center">Recent Contributions</h1>
+      </div>
+    </div>
+
+    <div class="w-1/2 mt-4">
+      <% @coffees.each do |coffee| %>
+        <div class="text-sm pb-2 text-gray-700">
+          <div class="flex items-center gap-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-8">
+              <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" clip-rule="evenodd" />
+            </svg>
+
+            <span class="font-semibold">
+              <%= coffee.user.full_name.presence || "Anonymous" %>
+            </span>
+
+            <span> bought you </span>
+
+            <span>
+              <%= coffee.quantity > 1 ? "#{coffee.quantity} coffees" : "a coffee"%>
+            </span>
+
+            <span>
+              for <%= number_to_currency(coffee.price) %> each
+            </span>
+          </div>
+
+          <% if coffee.review.comment.present? %>
+            <div class="border rounded-md shadow p-4 my-2 ml-8">
+              <%= coffee.review.comment %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 <% end %>

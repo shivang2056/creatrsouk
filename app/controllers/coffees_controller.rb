@@ -2,7 +2,7 @@ class CoffeesController < ApplicationController
   before_action :set_coffee_widget
 
   def show
-    render
+    @coffees = @coffee_widget.user_purchases.includes(:review).reorder(created_at: :desc)
   end
 
   def update
@@ -20,9 +20,9 @@ class CoffeesController < ApplicationController
   def set_coffee_widget
     @coffee_widget = current_user.coffee_product ||
                       current_user.build_coffee_product(
-                        name: 'Coffee Widget',
+                        name: "Coffee for #{current_user.full_name}",
                         price: 1,
-                        description: 'Coffee Widget'
+                        description: "Coffee Widget"
                       )
   end
 
