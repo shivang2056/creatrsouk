@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   resources :generic_products do
     get "my_products", to: "generic_products#user_products", on: :collection
     get "discover", to: "generic_products#index", on: :collection
+    get "reviews", on: :member
 
     resources :attachments, only: [:index, :create, :destroy]
   end

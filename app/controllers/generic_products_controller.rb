@@ -1,5 +1,5 @@
 class GenericProductsController < ApplicationController
-  before_action :set_product, only: %i[ show edit update ]
+  before_action :set_product, only: %i[ show edit update reviews ]
 
   def index
     @products = GenericProduct
@@ -55,6 +55,17 @@ class GenericProductsController < ApplicationController
                   .generic_products
                   .includes(:financial)
                   .with_name(params[:query])
+  end
+
+  def reviews
+    reviews_decorator = ProductReviewsDecorator.decorate(@product)
+
+    render turbo_stream: [
+        turbo_stream.update("modal",
+          partial: "reviews",
+          locals: { product: @product,
+                    reviews: reviews_decorator.reviews })
+      ]
   end
 
   private
