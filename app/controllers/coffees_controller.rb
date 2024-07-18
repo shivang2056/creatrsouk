@@ -22,7 +22,7 @@ class CoffeesController < ApplicationController
                       current_user.build_coffee_product(
                         name: "Coffee for #{current_user.full_name}",
                         price: 1,
-                        description: "Coffee Widget"
+                        description: "Coffee for #{current_user.full_name}"
                       )
   end
 

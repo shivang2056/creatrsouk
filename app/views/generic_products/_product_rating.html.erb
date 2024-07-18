@@ -42,7 +42,7 @@
   <% end %>
 
   <% if @rating_decorator.rating_count.present? %>
-    <%= link_to "(#{@rating_decorator.rating_count} ratings)", reviews_generic_product_path, data: { turbo_method: :get, turbo_prefetch: false }, class: "text-gray-700 hover:text-gray-900 hover:underline" %>
+    <%= link_to "(#{@rating_decorator.rating_count} ratings)", reviews_path, data: { turbo_method: :get, turbo_prefetch: false }, class: "text-gray-700 hover:text-gray-900 hover:underline" %>
   <% else %>
     <div>(No ratings)</div>
   <% end %>

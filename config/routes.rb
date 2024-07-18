@@ -11,7 +11,9 @@ Rails.application.routes.draw do
 
   constraints SubdomainConstraint do
     scope module: :stores do
-      resources :generic_products, only: [:index, :show], as: :store_products
+      resources :generic_products, only: [:index, :show], as: :store_products do
+        get "reviews", on: :member
+      end
       root to: 'generic_products#index', as: 'store_root'
       resource :checkout, only: [:show, :create], as: :store_checkout do
         get :new_coffee, on: :collection

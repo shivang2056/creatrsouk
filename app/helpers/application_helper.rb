@@ -39,8 +39,4 @@ module ApplicationHelper
   def product_created_by_current_user?
     @product.user_id == current_user.id
   end
-
-  def product_bought_by_current_user?
-    current_user.purchases.where(product: @product).any?
-  end
 end

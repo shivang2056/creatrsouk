@@ -1,3 +1,3 @@
 class GenericProduct < Product
-  validates :description, presence: true
+  validates :description, :image, presence: true
 end

@@ -37,7 +37,7 @@
       <% end %>
 
       <div class="mt-4">
-        <%= render "product_rating" %>
+        <%= render "product_rating", reviews_path: reviews_generic_product_path(@product) %>
       </div>
 
       <h1 class="text-4xl text-gray-900 font-semibold mt-10">
