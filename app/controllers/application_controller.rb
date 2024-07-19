@@ -13,6 +13,13 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def turbo_stream_update(element, partial, locals = {})
+    turbo_stream.update(element,
+      partial: partial,
+      locals: locals
+    )
+  end
+
   def devise_action?
     devise_controller? && resource_name == :user && !(controller_name == "registrations" && action_name == "edit")
   end

@@ -3,13 +3,14 @@ module Stores
 
     def new_coffee
       render turbo_stream: [
-        turbo_stream.update("modal",
-          partial: "new_coffee",
-          locals: { coffee_product: @store.coffee_product,
-                    user_purchases: @store.coffee_product
-                                          .user_purchases
-                                          .includes(:user, :review)
-                  })
+        turbo_stream_update("modal", "new_coffee",
+          {
+            coffee_product: @store.coffee_product,
+            user_purchases: @store.coffee_product
+                                  .user_purchases
+                                  .includes(:user, :review)
+          }
+        )
       ]
     end
 

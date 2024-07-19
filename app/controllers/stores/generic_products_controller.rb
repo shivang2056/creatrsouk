@@ -16,11 +16,13 @@ module Stores
       reviews_decorator = ProductReviewsDecorator.decorate(@product)
 
       render turbo_stream: [
-          turbo_stream.update("modal",
-            partial: "generic_products/reviews",
-            locals: { product: @product,
-                      reviews: reviews_decorator.reviews })
-        ]
+        turbo_stream_update("modal", "generic_products/reviews",
+          {
+            product: @product,
+            reviews: reviews_decorator.reviews
+          }
+        )
+      ]
     end
 
     private

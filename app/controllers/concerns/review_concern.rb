@@ -13,28 +13,27 @@ module ReviewConcern
       flash.now[:notice] = "Review Posted."
 
       render turbo_stream: [
-        turbo_stream.update("notification",
-          partial: "shared/notification"),
-        turbo_stream.update("review",
-          partial: "reviews/show",
-          locals: { review: @review })
+        turbo_stream_update("notification", "shared/notification"),
+        turbo_stream_update("review", "reviews/show", { review: @review })
       ]
     else
       flash.now[:error] = @review.errors.full_messages.join(', ')
 
       render turbo_stream: [
-        turbo_stream.update("notification",
-          partial: "shared/notification")
+        turbo_stream_update("notification", "shared/notification")
       ]
     end
   end
 
   def edit
     render turbo_stream: [
-        turbo_stream.update("review",
-          partial: "reviews/form",
-          locals: { review: @review, submit_label: "Edit Review" })
-      ]
+      turbo_stream_update("review", "reviews/form",
+        {
+          review: @review,
+          submit_label: "Edit Review"
+        }
+      )
+    ]
   end
 
   def update
@@ -42,18 +41,14 @@ module ReviewConcern
       flash.now[:notice] = "Review Updated."
 
       render turbo_stream: [
-        turbo_stream.update("notification",
-          partial: "shared/notification"),
-        turbo_stream.update("review",
-          partial: "reviews/show",
-          locals: { review: @review })
+        turbo_stream_update("notification", "shared/notification"),
+        turbo_stream_update("review", "reviews/show", { review: @review })
       ]
     else
       flash.now[:error] = @review.errors.full_messages.join(', ')
 
       render turbo_stream: [
-        turbo_stream.update("notification",
-          partial: "shared/notification")
+        turbo_stream_update("notification", "shared/notification")
       ]
     end
   end

@@ -61,11 +61,13 @@ class GenericProductsController < ApplicationController
     reviews_decorator = ProductReviewsDecorator.decorate(@product)
 
     render turbo_stream: [
-        turbo_stream.update("modal",
-          partial: "reviews",
-          locals: { product: @product,
-                    reviews: reviews_decorator.reviews })
-      ]
+      turbo_stream_update("modal", "reviews",
+        {
+          product: @product,
+          reviews: reviews_decorator.reviews
+        }
+      )
+    ]
   end
 
   private
