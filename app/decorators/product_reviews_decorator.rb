@@ -1,29 +1,36 @@
 class ProductReviewsDecorator
-  attr_reader :reviews
+  attr_reader :product
 
   def initialize(product)
     @product = product
-
-    process_reviews
   end
 
   def self.decorate(product)
-    self.new(product)
+    new(product)
+  end
+
+  def reviews
+    @reviews ||= process_reviews
   end
 
   private
 
   def process_reviews
-    @reviews = @product
-                .user_purchases
-                .includes(:review, :user)
-                .joins(:review)
-                .map do |purchase|
-      OpenStruct.new({
-        rating: purchase.review.rating,
-        comment: purchase.review.comment,
-        reviewer_name: purchase.user.full_name.presence || "Anonymous"
-      })
+    user_purchases = product
+                      .user_purchases
+                      .includes(:review, :user)
+                      .joins(:review)
+
+    user_purchases.map do |purchase|
+      review_struct(purchase)
     end
+  end
+
+  def review_struct(purchase)
+    OpenStruct.new({
+      rating: purchase.review.rating,
+      comment: purchase.review.comment,
+      reviewer_name: purchase.user.full_name.presence || "Anonymous"
+    })
   end
 end

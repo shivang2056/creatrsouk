@@ -1,9 +1,14 @@
 class StripeProductJob < ApplicationJob
   queue_as :default
 
-  def perform(product, options: {})
+  def perform(product, action: :create, price_update: nil)
     service = StripeProduct.new(product)
 
-    options[:create] ? service.create_product : service.update_product(options[:price_update])
+    case action
+    when :create
+      service.create_product
+    when :update
+      service.update_product(price_update)
+    end
   end
 end

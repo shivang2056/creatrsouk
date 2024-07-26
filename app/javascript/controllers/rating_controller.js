@@ -1,8 +1,8 @@
 import { Controller } from "@hotwired/stimulus"
 
 const starColors = {
-  'white': 'fill-white',
-  'gray': 'fill-gray-700'
+  white: 'fill-white',
+  gray: 'fill-gray-700'
 }
 
 // Connects to data-controller="rating"
@@ -12,19 +12,21 @@ export default class extends Controller {
   connect() {
   }
 
-  setRating(e) {
-    const rating = parseInt(e.target.dataset.rating);
-
-    this.starTargets.forEach((star) => {
-      if (parseInt(star.dataset.rating) <= rating) {
-        star.classList.remove(starColors['white']);
-        star.classList.add(starColors['gray']);
-      } else {
-        star.classList.remove(starColors['gray']);
-        star.classList.add(starColors['white']);
-      }
-    });
-
+  setRating(event) {
+    const rating = parseInt(event.target.dataset.rating);
+    this.updateStars(rating);
     this.inputTarget.value = rating;
+  }
+
+  updateStars(rating) {
+    this.starTargets.forEach(star => {
+      const starRating = parseInt(star.dataset.rating);
+      this.updateStarColor(star, starRating <= rating);
+    });
+  }
+
+  updateStarColor(star, isActive) {
+    star.classList.remove(starColors.white, starColors.gray);
+    star.classList.add(isActive ? starColors.gray : starColors.white);
   }
 }

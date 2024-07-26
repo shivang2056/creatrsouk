@@ -1,5 +1,6 @@
 class GenericProductsController < ApplicationController
   before_action :set_product, only: %i[ show edit update reviews ]
+  before_action :build_product, only: %i[ new create ]
 
   def index
     @products = GenericProduct
@@ -13,7 +14,7 @@ class GenericProductsController < ApplicationController
   end
 
   def new
-    @product = current_user.generic_products.new
+    render
   end
 
   def edit
@@ -21,32 +22,18 @@ class GenericProductsController < ApplicationController
   end
 
   def create
-    @product = current_user.generic_products.new(generic_product_params)
-
-    respond_to do |format|
-      if @product.save
-        sync_to_stripe
-
-        format.html { redirect_to edit_generic_product_url(@product), notice: "Product was successfully created." }
-        format.json { render :show, status: :created, location: @product }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
-      end
+    if @product.save
+      handle_success("Product was successfully created.")
+    else
+      handle_failure(:new)
     end
   end
 
   def update
-    respond_to do |format|
-      if @product.update(generic_product_params)
-        sync_to_stripe
-
-        format.html { redirect_to edit_generic_product_url(@product), notice: "Product was successfully updated." }
-        format.json { render :show, status: :ok, location: @product }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
-      end
+    if @product.update(generic_product_params)
+      handle_success("Product was successfully updated.")
+    else
+      handle_failure(:edit)
     end
   end
 
@@ -60,32 +47,51 @@ class GenericProductsController < ApplicationController
   def reviews
     reviews_decorator = ProductReviewsDecorator.decorate(@product)
 
-    render turbo_stream: [
-      turbo_stream_update("modal", "reviews",
-        {
-          product: @product,
-          reviews: reviews_decorator.reviews
-        }
-      )
-    ]
+    render turbo_stream: turbo_stream_update("modal", "reviews",
+      {
+        product: @product,
+        reviews: reviews_decorator.reviews
+      }
+    )
   end
 
   private
-    def set_product
-      @product = Product.find(params[:id])
-    end
 
-    def generic_product_params
-      params.require(:generic_product).permit(:name, :description, :price, :user_id, :image, :active)
-    end
+  def set_product
+    @product = Product.find(params[:id])
+  end
 
-    def sync_to_stripe
-      StripeProductJob.perform_later(
-        @product,
-        options: {
-          create: @product.id_previously_changed?,
-          price_update: @product.price_previously_changed?
-        }
-      )
-    end
+  def build_product
+    @product = current_user
+                .generic_products
+                .new(generic_product_params)
+  end
+
+  def generic_product_params
+    params
+      .require(:generic_product)
+      .permit(:name, :description, :price, :user_id, :image, :active)
+  end
+
+  def handle_success(flash_notice)
+    sync_to_stripe
+
+    redirect_to edit_generic_product_url(@product), notice: flash_notice
+  end
+
+  def handle_failure(render_action)
+    render render_action, status: :unprocessable_entity
+  end
+
+  def sync_to_stripe
+    StripeProductJob.perform_later(
+      @product,
+      action: determine_stripe_action,
+      price_update: @product.price_previously_changed?
+    )
+  end
+
+  def determine_stripe_action
+    @product.id_previously_changed? ? :create : :update
+  end
 end

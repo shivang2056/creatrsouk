@@ -10,50 +10,45 @@ module ReviewConcern
     @review = @user_purchase.build_review(review_params)
 
     if @review.save
-      flash.now[:notice] = "Review Posted."
-
-      render turbo_stream: [
-        turbo_stream_update("notification", "shared/notification"),
-        turbo_stream_update("review", "reviews/show", { review: @review })
-      ]
+      handle_review_save("Review Posted.")
     else
-      flash.now[:error] = @review.errors.full_messages.join(', ')
-
-      render turbo_stream: [
-        turbo_stream_update("notification", "shared/notification")
-      ]
+      handle_review_error
     end
   end
 
   def edit
-    render turbo_stream: [
-      turbo_stream_update("review", "reviews/form",
-        {
-          review: @review,
-          submit_label: "Edit Review"
-        }
-      )
-    ]
+    render turbo_stream: turbo_stream_update("review", "reviews/form",
+      {
+        review: @review,
+        submit_label: "Edit Review"
+      }
+    )
   end
 
   def update
     if @review.update(review_params)
-      flash.now[:notice] = "Review Updated."
-
-      render turbo_stream: [
-        turbo_stream_update("notification", "shared/notification"),
-        turbo_stream_update("review", "reviews/show", { review: @review })
-      ]
+      handle_review_save("Review Updated.")
     else
-      flash.now[:error] = @review.errors.full_messages.join(', ')
-
-      render turbo_stream: [
-        turbo_stream_update("notification", "shared/notification")
-      ]
+      handle_review_error
     end
   end
 
   private
+
+  def handle_review_save(flash_notice)
+    flash.now[:notice] = flash_notice
+
+    render turbo_stream: [
+      turbo_stream_update("notification", "shared/notification"),
+      turbo_stream_update("review", "reviews/show", { review: @review })
+    ]
+  end
+
+  def handle_review_error
+    flash.now[:error] = error_messages(@review)
+
+    render turbo_stream: turbo_stream_update("notification", "shared/notification")
+  end
 
   def set_user_purchase
     @user_purchase = UserPurchase.find(params[:user_purchase_id])
@@ -64,6 +59,8 @@ module ReviewConcern
   end
 
   def review_params
-    params.require(:review).permit(:rating, :comment)
+    params
+      .require(:review)
+      .permit(:rating, :comment)
   end
 end

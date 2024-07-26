@@ -9,18 +9,18 @@ class StoresController < ApplicationController
     if @store.update(store_params)
       redirect_to store_path, notice: "Store details updated."
     else
-      render :edit
+      flash.now[:error] = error_messages(@store)
+
+      render :show
     end
   end
 
   private
 
   def store_params
-    params.require(:store).permit(
-      :subdomain,
-      :background_color,
-      :highlight_color
-    )
+    params
+      .require(:store)
+      .permit(:subdomain, :background_color, :highlight_color)
   end
 
   def set_store

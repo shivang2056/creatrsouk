@@ -11,25 +11,30 @@ class AttachmentDecorator
   end
 
   def self.decorate(product)
-    self.new(product)
+    new(product)
   end
 
   def attachments
-    @product.attachments.map do |attachment|
-      {
-        name: attachment.name,
-        type: attachment_type(attachment),
-        size: attachment_size(attachment),
-        download_path: attachment_download_path(attachment),
-        delete_path: attachment_delete_path(attachment)
-      }
-    end
+    @product.attachments.map { |attachment| attachment_details(attachment) }
   end
 
   private
 
+  def attachment_details(attachment)
+    {
+      name: attachment.name,
+      type: attachment_type(attachment),
+      size: attachment_size(attachment),
+      download_path: attachment_download_path(attachment),
+      delete_path: attachment_delete_path(attachment)
+    }
+  end
+
   def attachment_type(attachment)
-    Marcel::EXTENSIONS.key(attachment.file.blob.content_type).upcase
+    content_type = attachment.file.blob.content_type
+
+    extension = Marcel::EXTENSIONS.key(content_type)
+    extension.upcase
   end
 
   def attachment_size(attachment)

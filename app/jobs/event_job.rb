@@ -17,7 +17,7 @@ class EventJob < ApplicationJob
     when 'account.updated'
       handle_account_updated(stripe_event)
     when 'checkout.session.completed'
-      CheckoutComplete.process(stripe_event)
+      handle_checkout_complete(stripe_event)
     end
   end
 
@@ -30,5 +30,9 @@ class EventJob < ApplicationJob
       payouts_enabled: stripe_account.payouts_enabled,
       details_submitted: stripe_account.details_submitted
     )
+  end
+
+  def handle_checkout_complete(stripe_event)
+    CheckoutComplete.process(stripe_event)
   end
 end

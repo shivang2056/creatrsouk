@@ -9,8 +9,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def after_update_path_for(resource)
-    flash[:notice] = 'Profile updated successfully'
-
-    edit_user_registration_path
+    edit_user_registration_path, notice: "Profile updated successfully"
   end
 end

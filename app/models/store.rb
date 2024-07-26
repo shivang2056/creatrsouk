@@ -8,13 +8,24 @@ class Store < ApplicationRecord
   delegate :coffee_widget_enabled?, to: :user
 
   def self.find_by_request(request)
-    where(subdomain: request.subdomain).first
+    find_by(subdomain: request.subdomain)
   end
 
   def store_url
-    # TODO: Need to add host for non development env.
+    options = { subdomain: subdomain }
+    options.merge!(default_url_options)
+
+    store_root_url(options)
+  end
+
+  private
+
+  def default_url_options
     if Rails.env.development?
-      store_root_url(subdomain: subdomain, host: 'lvh.me', port: 3000)
+      { host: 'lvh.me', port: 3000 }
+    else
+      # TODO: Need to add host for non development env.
+      { host: ENV['HOST'] }
     end
   end
 end

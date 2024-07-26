@@ -4,6 +4,6 @@ class UserPurchase < ApplicationRecord
 
   has_one :review
 
-  scope :generic_purchases, -> { joins(:product).where(product: {type: 'GenericProduct'}) }
-  scope :coffee_purchases, -> { joins(:product).where(product: {type: 'CoffeeProduct'}) }
+  scope :generic, -> { joins(:product).where(products: {type: 'GenericProduct'}) }
+  scope :coffee, -> { joins(:product).where(products: {type: 'CoffeeProduct'}) }
 end

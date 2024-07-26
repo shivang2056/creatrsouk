@@ -11,28 +11,26 @@ class StripeCheckout
   end
 
   def create_session
+    payload = build_payload
+    return nil if payload[:line_items].empty?
+
+    Stripe::Checkout::Session.create(payload, stripe_account_header)
+  end
+
+  private
+
+  def build_payload
     payload = base_payload
 
-    payload[:line_items] << line_item if @product.present?
+    add_product_line_item_to_payload(payload) if product
+    add_coffee_line_item_to_payload(payload) if coffee_purchased?
 
-    if @coffee_params[:quantity].to_i > 0
-      payload[:metadata] = {
-        coffee: true,
-        giver_name: @coffee_params[:contributor_name],
-        comment: @coffee_params[:comment]
-      }
-
-      payload[:line_items] << line_item(coffee: true)
-    end
-
-    return nil if payload[:line_items].blank?
-
-    Stripe::Checkout::Session.create(payload, header)
+    payload
   end
 
   def base_payload
     {
-      customer_email: @current_user && @current_user.email,
+      customer_email: current_user&.email,
       mode: 'payment',
       success_url: @success_url,
       cancel_url: @cancel_url,
@@ -40,22 +38,40 @@ class StripeCheckout
     }
   end
 
-  def line_item(coffee: false)
+  def add_product_line_item_to_payload(payload)
+    payload[:line_items] << line_item_for_product
+  end
+
+  def add_coffee_line_item_to_payload(payload)
+    payload[:metadata] = coffee_metadata
+    payload[:line_items] << line_item_for_coffee
+  end
+
+  def line_item_for_product
+    line_item(product.stripe_price_id, 1)
+  end
+
+  def line_item_for_coffee
+    line_item(author.coffee_product.stripe_price_id, coffee_params[:quantity].to_i)
+  end
+
+  def line_item(price_id, quantity)
+    { price: price_id, quantity: quantity }
+  end
+
+  def coffee_metadata
     {
-      price: line_item_stripe_price_id(coffee),
-      quantity: line_item_quantity(coffee)
+      coffee: true,
+      giver_name: coffee_params[:contributor_name],
+      comment: coffee_params[:comment]
     }
   end
 
-  def line_item_stripe_price_id(coffee)
-    coffee ? @author.coffee_product.stripe_price_id : @product.stripe_price_id
+  def coffee_purchased?
+    coffee_params[:quantity].to_i > 0
   end
 
-  def line_item_quantity(coffee)
-    coffee ? @coffee_params[:quantity].to_i : 1
-  end
-
-  def header
-    { stripe_account: @author.account.stripe_id }
+  def stripe_account_header
+    { stripe_account: author.account.stripe_id }
   end
 end

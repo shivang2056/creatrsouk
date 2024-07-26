@@ -3,7 +3,7 @@ class Review < ApplicationRecord
 
   belongs_to :user_purchase
 
-  validate :rating_or_comment
+  validate :presence_of_rating_or_comment
 
   private
 
@@ -11,7 +11,9 @@ class Review < ApplicationRecord
     ProductReviewJob.perform_later(self)
   end
 
-  def rating_or_comment
-    errors.add(:base, "Either rating or comment must be present") if rating.blank? && comment.blank?
+  def presence_of_rating_or_comment
+    if rating.blank? && comment.blank?
+      errors.add(:base, "Either rating or comment must be present")
+    end
   end
 end

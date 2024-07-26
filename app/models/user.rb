@@ -7,8 +7,8 @@ class User < ApplicationRecord
   has_many :generic_products
   has_one :coffee_product
   has_many :user_purchases
-  has_many :purchases, -> { joins(:product).where(products: { type: 'GenericProduct' }) }, class_name: 'UserPurchase'
-  has_many :given_coffees, -> { joins(:product).where(products: { type: 'CoffeeProduct' }) }, class_name: 'UserPurchase'
+  has_many :purchases, -> { generic }, class_name: 'UserPurchase'
+  has_many :given_coffees, -> { coffee }, class_name: 'UserPurchase'
   has_many :reviews, through: :purchases
   has_one :account
   has_one :store
@@ -16,17 +16,17 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :store
 
   def full_name
-    [firstname, lastname].reject(&:blank?).join(' ').titleize
+    "#{firstname} #{lastname}".strip.titleize
   end
 
   def update_name!(name)
     return if name.blank?
     splits = name.split(' ')
 
-    self.update!(firstname: splits[0], lastname: splits[1..].join(' '))
+    self.update!(firstname: splits.first, lastname: splits.drop(1).join(' '))
   end
 
   def coffee_widget_enabled?
-    coffee_product && coffee_product.active?
+    coffee_product&.active?
   end
 end

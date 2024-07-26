@@ -1,22 +1,20 @@
 class AttachmentsController < ApplicationController
-  before_action :set_product, only: [:create, :destroy]
+  before_action :set_product
   before_action :set_attachment, only: [:destroy]
 
   def index
-    @product = Product
-                .includes(attachments: [file_attachment: :blob])
-                .find(params[:generic_product_id])
-
     @attachment_decorator = AttachmentDecorator.decorate(@product)
   end
 
   def create
-    attachment = @product.attachments.new(attachment_params)
+    attachment = @product
+                  .attachments
+                  .new(attachment_params)
 
     if attachment.save
       flash[:notice] = "Attachment added."
     else
-      flash[:error] = attachment.errors.full_messages.join(', ')
+      flash[:error] = error_messages(attachment)
     end
 
     redirect_to generic_product_attachments_path(@product)
@@ -26,7 +24,7 @@ class AttachmentsController < ApplicationController
     if @attachment.destroy
       flash[:notice] = "Attachment removed."
     else
-      flash[:error] = "Something went wrong. Please try again."
+      flash[:error] = error_messages(@attachment)
     end
 
     redirect_to generic_product_attachments_path(@product)
@@ -35,14 +33,20 @@ class AttachmentsController < ApplicationController
   private
 
   def attachment_params
-    params.require(:attachment).permit(:file, :name)
+    params
+      .require(:attachment)
+      .permit(:file, :name)
   end
 
   def set_product
-    @product = Product.find(params[:generic_product_id])
+    @product = Product
+                .includes(attachments: [file_attachment: :blob])
+                .find(params[:generic_product_id])
   end
 
   def set_attachment
-    @attachment = @product.attachments.find(params[:id])
+    @attachment = @product
+                    .attachments
+                    .find(params[:id])
   end
 end

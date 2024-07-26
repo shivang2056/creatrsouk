@@ -1,17 +1,21 @@
 import { Controller } from "@hotwired/stimulus"
 
+const DEFAULT_CLASS = 'hover:bg-gray-300';
+const ACTIVE_CLASS = 'bg-white shadow';
+
 export default class extends Controller {
-  static targets = [ "link" ]
+  static targets = ["link"]
 
   switch(event) {
-    this.linkTargets.forEach((element) => {
-      element.classList.remove('bg-white')
-      element.classList.remove('shadow')
-      element.classList.add('hover:bg-gray-300')
-    })
+    this.linkTargets.forEach(element => {
+      this.updateClasses(element, [DEFAULT_CLASS], [ACTIVE_CLASS]);
+    });
 
-    event.currentTarget.classList.remove('hover:bg-gray-300')
-    event.currentTarget.classList.add('bg-white')
-    event.currentTarget.classList.add('shadow')
+    this.updateClasses(event.currentTarget, [ACTIVE_CLASS], [DEFAULT_CLASS]);
+  }
+
+  updateClasses(element, addClasses, removeClasses) {
+    element.classList.remove(...removeClasses);
+    element.classList.add(...addClasses);
   }
 }
