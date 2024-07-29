@@ -1,0 +1,1 @@
+file1_blob: <%= ActiveStorage::FixtureSet.blob filename: "sample.txt", service_name: "test" %>

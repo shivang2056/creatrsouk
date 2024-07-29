@@ -21,7 +21,7 @@ class Store < ApplicationRecord
   private
 
   def default_url_options
-    if Rails.env.development?
+    if Rails.env.development? || Rails.env.test?
       { host: 'lvh.me', port: 3000 }
     else
       # TODO: Need to add host for non development env.

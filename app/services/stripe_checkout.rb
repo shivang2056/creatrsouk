@@ -1,5 +1,5 @@
 class StripeCheckout
-  attr_reader :stripe_id, :product, :coffee_params, :current_user
+  attr_reader :author, :stripe_id, :product, :coffee_params, :current_user
 
   def initialize(author:, product: nil, coffee_params: {}, success_url:, cancel_url:, current_user: nil)
     @author = author

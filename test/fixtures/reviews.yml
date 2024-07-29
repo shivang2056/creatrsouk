@@ -1,13 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-# one:
-#   rating: 1
-#   comment: MyText
-#   product: one
-#   user: one
+review1:
+  rating: 3
+  comment: TestComment
+  user_purchase: purchase1
 
 # two:
 #   rating: 1
 #   comment: MyText
-#   product: two
-#   user: two
+#   user_purchase: two

@@ -41,7 +41,7 @@
         </div>
 
         <div class="text-gray-500 pt-4">
-          <%= @coffee_widget.financial.sales %>
+          <%= @decorated_coffee.contributions_count %>
         </div>
       </div>
 
@@ -51,7 +51,7 @@
         </div>
 
         <div class="text-gray-500 pt-4">
-          <%= number_to_currency(@coffee_widget.financial.revenue) %>
+          <%= @decorated_coffee.total_contributions_amount %>
         </div>
       </div>
     </div>
@@ -63,7 +63,7 @@
     </div>
 
     <div class="w-1/2 mt-4">
-      <% @coffees.each do |coffee| %>
+      <% @decorated_coffee.contributions.each do |contribution| %>
         <div class="text-sm pb-2 text-gray-700">
           <div class="flex items-center gap-1">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-8">
@@ -71,23 +71,23 @@
             </svg>
 
             <span class="font-semibold">
-              <%= coffee.user.full_name.presence || "Anonymous" %>
+              <%= contribution[:contributor_name] %>
             </span>
 
             <span> bought you </span>
 
             <span>
-              <%= coffee.quantity > 1 ? "#{coffee.quantity} coffees" : "a coffee"%>
+              <%= contribution[:quantity] %>
             </span>
 
             <span>
-              for <%= number_to_currency(coffee.price) %> each
+              for <%= contribution[:price_per_coffee] %> each
             </span>
           </div>
 
-          <% if coffee.review.comment.present? %>
+          <% if contribution[:comment].present? %>
             <div class="border rounded-md shadow p-4 my-2 ml-8">
-              <%= coffee.review.comment %>
+              <%= contribution[:comment] %>
             </div>
           <% end %>
         </div>

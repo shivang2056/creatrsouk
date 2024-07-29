@@ -22,6 +22,8 @@ class GenericProductsController < ApplicationController
   end
 
   def create
+    @product.assign_attributes(generic_product_params)
+
     if @product.save
       handle_success("Product was successfully created.")
     else
@@ -64,7 +66,7 @@ class GenericProductsController < ApplicationController
   def build_product
     @product = current_user
                 .generic_products
-                .new(generic_product_params)
+                .new
   end
 
   def generic_product_params

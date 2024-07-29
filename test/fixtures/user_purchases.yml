@@ -1,14 +1,20 @@
 # # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-# purchase1:
-#   user: user2
-#   product: product1
-#   price: 9.99
+purchase1:
+  user: user2
+  product: product1
+  price: 9.99
 
-# purchase2:
-#   user: user3
-#   product: product1
-#   price: 9.99
+purchase2:
+  user: user3
+  product: product1
+  price: 9.99
+
+coffee_purchase1:
+  user: user2
+  product: coffee_product1
+  price: 2
+  quantity: 4
 
 # purchase3:
 #   user: user4

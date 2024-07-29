@@ -46,9 +46,11 @@
             </span>
           </div>
 
-          <div class="mt-4 border border-gray-300 rounded-md px-3 py-2">
-            <%= @coffee_purchase.review.comment %>
-          </div>
+          <% if @coffee_purchase.review.present? %>
+            <div class="mt-4 border border-gray-300 rounded-md px-3 py-2">
+              <%= @coffee_purchase.review.comment %>
+            </div>
+          <% end %>
         </div>
       <% end %>
     </div>

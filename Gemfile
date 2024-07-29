@@ -69,6 +69,10 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  gem 'mocha'
+  gem 'minitest-rails'
+  gem 'webmock'
+  gem 'rails-controller-testing'
 end
 
 gem "sidekiq", "~> 7.2"

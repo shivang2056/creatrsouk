@@ -2,10 +2,7 @@ class CoffeesController < ApplicationController
   before_action :set_coffee_widget
 
   def show
-    @coffees = @coffee_widget
-                .user_purchases
-                .includes(:review)
-                .reorder(created_at: :desc)
+    decorate_coffee_contributions
   end
 
   def update
@@ -14,6 +11,8 @@ class CoffeesController < ApplicationController
 
       redirect_to coffee_path, notice: "Coffee Widget updated."
     else
+      decorate_coffee_contributions
+
       render :show
     end
   end
@@ -22,6 +21,10 @@ class CoffeesController < ApplicationController
 
   def set_coffee_widget
     @coffee_widget = find_or_initialize_coffee_widget
+  end
+
+  def decorate_coffee_contributions
+    @decorated_coffee = CoffeeContributionDecorator.decorate(@coffee_widget)
   end
 
   def find_or_initialize_coffee_widget

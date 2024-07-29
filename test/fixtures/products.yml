@@ -1,13 +1,21 @@
 # # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-# <% description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas venenatis metus vel eros feugiat, at pretium mi congue. Nunc interdum venenatis lectus, ac ornare tellus ultricies nec. Suspendisse potenti. Curabitur mi leo, rhoncus ut mauris quis, luctus egestas elit. Nullam iaculis orci vitae nunc ultrices, id cursus erat aliquam. Nulla facilisi. Aenean hendrerit ex at iaculis varius. Suspendisse egestas non felis sit amet congue. Donec malesuada sodales condimentum. Cras sodales efficitur odio, quis congue urna sollicitudin auctor. Aenean tincidunt rhoncus." %>
+<% description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas venenatis metus vel eros feugiat, at pretium mi congue. Nunc interdum venenatis lectus, ac ornare tellus ultricies nec. Suspendisse potenti. Curabitur mi leo, rhoncus ut mauris quis, luctus egestas elit. Nullam iaculis orci vitae nunc ultrices, id cursus erat aliquam. Nulla facilisi. Aenean hendrerit ex at iaculis varius. Suspendisse egestas non felis sit amet congue. Donec malesuada sodales condimentum. Cras sodales efficitur odio, quis congue urna sollicitudin auctor. Aenean tincidunt rhoncus." %>
 
-# product1:
-#   name: Product1
-#   description: <%= description %>
-#   price: 9.99
-#   active: true
-#   user: user1
+product1:
+  name: Product1
+  description: <%= description %>
+  price: 9.99
+  active: true
+  user: user1
+  type: GenericProduct
+
+coffee_product1:
+  name: "Coffee for Test1"
+  price: 10
+  description: "Coffee for Test1"
+  user: user1
+  type: CoffeeProduct
 
 # product2:
 #   name: Product2
