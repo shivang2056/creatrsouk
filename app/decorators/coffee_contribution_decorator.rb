@@ -21,7 +21,7 @@ class CoffeeContributionDecorator
   end
 
   def contributions
-    coffee_purchases.map do |purchase|
+    coffee_purchases.reorder(created_at: :desc).map do |purchase|
       {
         contributor_name: contributor_name(purchase),
         quantity: quantity(purchase),

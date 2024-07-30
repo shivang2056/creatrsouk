@@ -15,7 +15,7 @@ class AttachmentDecorator
   end
 
   def attachments
-    @product.attachments.map { |attachment| attachment_details(attachment) }
+    @product.attachments.reorder(created_at: :asc).map { |attachment| attachment_details(attachment) }
   end
 
   private
