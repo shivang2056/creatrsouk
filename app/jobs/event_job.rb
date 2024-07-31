@@ -33,6 +33,6 @@ class EventJob < ApplicationJob
   end
 
   def handle_checkout_complete(stripe_event)
-    CheckoutComplete.process(stripe_event)
+    CheckoutComplete::Processor.process(stripe_event)
   end
 end
