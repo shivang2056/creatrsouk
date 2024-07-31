@@ -14,6 +14,7 @@ class StripeAccountTest < ActiveSupport::TestCase
   end
 
   test 'creates a stripe account if stripe_id not present' do
+    @account.update(stripe_id: nil)
     Stripe::Account.expects(:create).with(instance_of(Hash)).returns(
       Stripe::StripeObject.construct_from({
         id: 'test_stripe_id',
