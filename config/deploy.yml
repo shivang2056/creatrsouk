@@ -1,0 +1,73 @@
+# config/deploy.yml
+---
+service: creatrsouk
+image: shivang2056yadav/creatrsouk
+servers:
+  web:
+    hosts:
+      - 37.27.197.50
+    options:
+      "add-host": host.docker.internal:host-gateway
+    labels:
+      traefik.http.routers.creatrsouk.entrypoints: websecure
+      traefik.http.routers.creatrsouk.rule: "Host(`creatrsouk.xyz`) || Host(`www.creatrsouk.xyz`)"
+      traefik.http.routers.creatrsouk.tls.certresolver: letsencrypt
+      traefik.http.routers.creatrsouk.tls.domains[0].main: creatrsouk.xyz
+      traefik.http.routers.creatrsouk.tls.domains[0].sans: www.creatrsouk.xyz
+  worker:
+    hosts:
+      - 37.27.197.50
+    cmd: bundle exec sidekiq
+registry:
+  username: shivang2056yadav
+  password:
+  - KAMAL_REGISTRY_PASSWORD
+traefik:
+  options:
+    publish:
+      - "443:443"
+    volume:
+      - "/root/acme.json:/letsencrypt/acme.json"
+  args:
+    entryPoints.web.address: ":80"
+    entryPoints.websecure.address: ":443"
+    entryPoints.web.http.redirections.entryPoint.to: websecure
+    entryPoints.web.http.redirections.entryPoint.scheme: https
+    entryPoints.web.http.redirections.entrypoint.permanent: true
+    certificatesResolvers.letsencrypt.acme.email: "shivang2056yadav@gmail.com"
+    certificatesResolvers.letsencrypt.acme.storage: "/letsencrypt/acme.json"
+    certificatesResolvers.letsencrypt.acme.httpchallenge: true
+    certificatesResolvers.letsencrypt.acme.httpchallenge.entrypoint: web
+env:
+  clear:
+    DB_HOST: 37.27.197.50
+    POSTGRES_USER: creatrsouk
+    POSTGRES_DB: creatrsouk_production
+    redis: 37.27.197.50
+  secret:
+  - RAILS_MASTER_KEY
+  - POSTGRES_PASSWORD
+  - REDIS_URL
+ssh:
+  user: root
+accessories:
+  db:
+    image: postgres:16
+    host: 37.27.197.50
+    port: 5432
+    env:
+      clear:
+        POSTGRES_USER: creatrsouk
+        POSTGRES_DB: creatrsouk_production
+      secret:
+      - POSTGRES_PASSWORD
+    directories:
+    - data:/var/lib/postgresql/data
+  redis:
+    image: redis:7.0
+    roles:
+      - web
+      - worker
+    port: 6379
+    directories:
+    - data:/data

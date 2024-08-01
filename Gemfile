@@ -82,3 +82,5 @@ gem "byebug", "~> 11.1"
 gem "stripe", "~> 11.4"
 
 gem "faker"
+
+gem "kamal"
