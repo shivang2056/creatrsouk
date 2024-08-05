@@ -14,7 +14,7 @@
 
   <div>
     <%= form.label :price, class: "flex items-center gap-1 text-sm font-medium text-gray-700" %>
-    <%= form.number_field :price, class: "appearance-none block w-full px-3 py-2 h-5 mt-1 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 text-sm h-full border-gray-300 opacity-100" %>
+    <%= form.number_field :price, step: 0.01, class: "appearance-none block w-full px-3 py-2 h-5 mt-1 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 text-sm h-full border-gray-300 opacity-100" %>
   </div>
 
   <%= render "shared/toggle_switch", form: form, attribute: :active, label: 'Active' %>

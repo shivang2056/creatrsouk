@@ -12,6 +12,8 @@ class Store < ApplicationRecord
   end
 
   def store_url
+    return nil unless subdomain.present?
+
     options = { subdomain: subdomain }
     options.merge!(default_url_options)
 

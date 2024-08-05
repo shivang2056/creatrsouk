@@ -51,8 +51,8 @@ module Stores
       StripeCheckout.new(
         author: @store.user,
         product: product,
-        coffee_params: create_params[:coffee_attributes],
-        success_url: store_checkout_url + "?session_id={CHECKOUT_SESSIONID}",
+        coffee_params: create_params[:coffee_attributes] || {},
+        success_url: store_checkout_url + "?session_id={CHECKOUT_SESSION_ID}",
         cancel_url: product.present? ? store_product_url(product) : store_root_url
       )
     end

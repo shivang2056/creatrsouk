@@ -36,7 +36,7 @@ class UserPurchasesController < ApplicationController
     StripeCheckout.new(
       author: product.user,
       product: product,
-      coffee_params: create_params[:coffee_attributes],
+      coffee_params: create_params[:coffee_attributes] || {},
       success_url: user_purchases_url,
       cancel_url: generic_product_url(product),
       current_user: current_user

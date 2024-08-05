@@ -24,6 +24,6 @@ class StoresController < ApplicationController
   end
 
   def set_store
-    @store = current_user.store
+    @store = current_user.store || current_user.build_store(background_color: '#f3f4f6')
   end
 end

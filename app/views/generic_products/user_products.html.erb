@@ -50,7 +50,7 @@
               <%= link_to product.name, generic_product_path(product), class: "text-gray-900 hover:underline hover:underline-offset-3 whitespace-no-wrap", data: { turbo_frame: "_top" } %>
             </td>
             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-              <p class="text-gray-900 whitespace-no-wrap"><%= number_to_currency(product.financial&.sales || 0) %></p>
+              <p class="text-gray-900 whitespace-no-wrap"><%= (product.financial&.sales || 0) %></p>
             </td>
             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
               <p class="text-gray-900 whitespace-no-wrap"><%= number_to_currency(product.financial&.revenue&.to_f || 0) %></p>
