@@ -42,7 +42,11 @@ class AttachmentDecorator
   end
 
   def attachment_download_path(attachment)
-    rails_blob_path(attachment.file, disposition: 'attachment')
+    if Rails.env.production?
+      attachment.file.url
+    else
+      rails_blob_path(attachment.file, disposition: 'attachment')
+    end
   end
 
   def attachment_delete_path(attachment)

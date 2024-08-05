@@ -84,3 +84,5 @@ gem "stripe", "~> 11.4"
 gem "faker"
 
 gem "kamal"
+
+gem "cloudinary", "~> 2.1"

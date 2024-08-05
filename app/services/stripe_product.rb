@@ -27,6 +27,7 @@ class StripeProduct
     {
       name: product.name,
       description: product.description,
+      images: [product_image(product)],
       metadata: product_metadata,
       default_price_data: price_data,
       expand: ['default_price']
@@ -36,7 +37,8 @@ class StripeProduct
   def update_params
     {
       name: product.name,
-      description: product.description
+      description: product.description,
+      images: [product_image(product)]
     }
   end
 
@@ -77,6 +79,10 @@ class StripeProduct
       currency: 'usd',
       unit_amount: unit_amount
     }
+  end
+
+  def product_image(product)
+    Rails.env.production? ? product.image.url : nil
   end
 
   def stripe_header
