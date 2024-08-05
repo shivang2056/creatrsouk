@@ -3,7 +3,8 @@ require 'test_helper'
 class RatingDecoratorTest < ActiveSupport::TestCase
   setup do
     @product = products(:product1)
-    @product.update(average_rating: 3.3, reviews_count: 150)
+    @product.image.attach(file_fixture('image.jpeg'))
+    @product.update!(average_rating: 3.3, reviews_count: 150)
     @decorator = RatingDecorator.decorate(@product)
   end
 
