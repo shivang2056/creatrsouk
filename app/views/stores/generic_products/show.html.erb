@@ -23,7 +23,7 @@
         <%= number_to_currency(@product.price) %>
       </h1>
 
-      <%= form_with url: "/checkout", local: true, data: { turbo: false }, class: "flex justify-center mt-auto text-lg duration-200 border font-medium focus:outline-none focus:ring-2 inline-flex bg-white hover:bg-gray-300 text-gray-900 border-gray-900 rounded-md focus:z-10 py-2 pr-4 pl-2" do |form| %>
+      <%= form_with url: "/checkout", local: true, data: { turbo: false }, class: "flex justify-center mt-auto text-lg duration-200 border font-medium focus:outline-none focus:ring-2 inline-flex bg-white hover:bg-gray-300 text-gray-900 border-gray-900 rounded-md focus:z-10 py-2 pr-4 pl-2", html: { style: "background-color: #{@store.highlight_color};"} do |form| %>
         <%= form.hidden_field :generic_product_id, value: @product.id %>
         <%= form.button class: "flex justify-center space-x-1" do %>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
@@ -44,6 +44,6 @@
   </div>
 
   <% if @product.user.coffee_widget_enabled? %>
-    <%= render "generic_products/buy_with_coffee", checkout_path: "/checkout", coffee_product: @store.coffee_product, show_tip_giver_input: true %>
+    <%= render "generic_products/buy_with_coffee", checkout_path: "/checkout", coffee_product: @store.coffee_product, store_product: true %>
   <% end %>
 </div>

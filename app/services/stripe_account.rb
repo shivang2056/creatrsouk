@@ -1,6 +1,6 @@
 class StripeAccount
   include Rails.application.routes.url_helpers
-  attr_reader :account
+  attr_reader :account, :store
 
   MCC_CODE = "5818"
   BUSINESS_TYPE = 'individual'
@@ -17,6 +17,7 @@ class StripeAccount
 
   def initialize(account)
     @account = account
+    @store = account.user.store
   end
 
   def default_url_options
@@ -28,6 +29,12 @@ class StripeAccount
 
     stripe_account = Stripe::Account.create(stripe_account_params)
     account.update(stripe_id: stripe_account.id)
+  end
+
+  def update_account_branding
+    return if store.background_color.nil? || store.highlight_color.nil?
+
+    Stripe::Account.update(account.stripe_id, { settings: branding_params })
   end
 
   def onboarding_url
@@ -43,7 +50,8 @@ class StripeAccount
       business_type: BUSINESS_TYPE,
       individual: individual_details,
       business_profile: business_profile_details,
-      company: company_details
+      company: company_details,
+      settings: branding_params
     }
   end
 
@@ -86,6 +94,15 @@ class StripeAccount
       return_url: account_url,
       type: 'account_onboarding',
       collect: 'eventually_due',
+    }
+  end
+
+  def branding_params
+    {
+      branding: {
+        primary_color: store.background_color,
+        secondary_color: store.highlight_color
+      }
     }
   end
 end
