@@ -4,14 +4,14 @@ class StripeAccount
 
   MCC_CODE = "5818"
   BUSINESS_TYPE = 'individual'
-  PHONE_NUMBER = '5005550006'
+  PHONE_NUMBER = '5454545454'
   DEFAULT_DOB = { day: 1, month: 1, year: 1901 }
   BUSINESS_DESCRIPTION = 'Digital creations and content'
-  BUSINESS_URL = 'https://www.difarapizzany.com/'
+  BUSINESS_URL = 'https://www.creatrsouk.xyz/'
   US_COUNTRY_CODE = 'US'
   CITY = 'Brooklyn'
   LINE1 = 'address_full_match'
-  LINE2 = '1424 Avenue J'
+  LINE2 = '1111 Test St'
   POSTAL_CODE = '11230'
   STATE = 'NY'
 
