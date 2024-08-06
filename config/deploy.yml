@@ -10,10 +10,8 @@ servers:
       "add-host": host.docker.internal:host-gateway
     labels:
       traefik.http.routers.creatrsouk.entrypoints: websecure
-      traefik.http.routers.creatrsouk.rule: "Host(`creatrsouk.xyz`) || Host(`www.creatrsouk.xyz`)"
+      traefik.http.routers.creatrsouk.rule: "Host(`creatrsouk.xyz`) || Host(`*.creatrsouk.xyz`)"
       traefik.http.routers.creatrsouk.tls.certresolver: letsencrypt
-      traefik.http.routers.creatrsouk.tls.domains[0].main: creatrsouk.xyz
-      traefik.http.routers.creatrsouk.tls.domains[0].sans: www.creatrsouk.xyz
   worker:
     hosts:
       - 37.27.197.50
@@ -34,16 +32,23 @@ traefik:
     entryPoints.web.http.redirections.entryPoint.to: websecure
     entryPoints.web.http.redirections.entryPoint.scheme: https
     entryPoints.web.http.redirections.entrypoint.permanent: true
+    entrypoints.websecure.http.tls: true
+    entrypoints.websecure.http.tls.domains[0].main: "creatrsouk.xyz"
+    entrypoints.websecure.http.tls.domains[0].sans: "*.creatrsouk.xyz"
     certificatesResolvers.letsencrypt.acme.email: "shivang2056yadav@gmail.com"
     certificatesResolvers.letsencrypt.acme.storage: "/letsencrypt/acme.json"
-    certificatesResolvers.letsencrypt.acme.httpchallenge: true
-    certificatesResolvers.letsencrypt.acme.httpchallenge.entrypoint: web
+    certificatesresolvers.letsencrypt.acme.dnschallenge.provider: cloudflare
+  env:
+    secret:
+    - CLOUDFLARE_API_KEY
+    - CLOUDFLARE_EMAIL
 env:
   clear:
     DB_HOST: 37.27.197.50
     POSTGRES_USER: creatrsouk
     POSTGRES_DB: creatrsouk_production
     redis: 37.27.197.50
+    HOST: creatrsouk.xyz
   secret:
   - RAILS_MASTER_KEY
   - POSTGRES_PASSWORD
