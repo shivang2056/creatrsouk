@@ -23,7 +23,7 @@ class StripeProductTest < ActiveSupport::TestCase
       {
         name: @product.name,
         description: @product.description,
-        images: [nil],
+        images: [],
         metadata: {
           user_id: @product.user_id,
           product_id: @product.id
@@ -59,7 +59,7 @@ class StripeProductTest < ActiveSupport::TestCase
       {
         name: @product.name,
         description: @product.description,
-        images: [nil]
+        images: []
       },
       stripe_header
     ).returns(stripe_product)

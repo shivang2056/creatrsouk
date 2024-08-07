@@ -32,6 +32,8 @@ class StoresController < ApplicationController
   end
 
   def set_store
-    @store = current_user.store || current_user.build_store(background_color: '#f3f4f6', highlight_color: '#000000')
+    @store = current_user.store ||
+             current_user.build_store(background_color: Store::DEFAULT_BACKGROUND_COLOR,
+                highlight_color: Store::DEFAULT_HIGHTLIGHT_COLOR)
   end
 end

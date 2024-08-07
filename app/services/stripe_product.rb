@@ -27,7 +27,7 @@ class StripeProduct
     {
       name: product.name,
       description: product.description,
-      images: [product_image(product)],
+      images: fetch_images(product),
       metadata: product_metadata,
       default_price_data: price_data,
       expand: ['default_price']
@@ -38,7 +38,7 @@ class StripeProduct
     {
       name: product.name,
       description: product.description,
-      images: [product_image(product)]
+      images: fetch_images(product)
     }
   end
 
@@ -81,8 +81,8 @@ class StripeProduct
     }
   end
 
-  def product_image(product)
-    Rails.env.production? ? product.image.url : nil
+  def fetch_images(product)
+    Rails.env.production? ? [product.image.url].compact : []
   end
 
   def stripe_header

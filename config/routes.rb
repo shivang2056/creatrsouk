@@ -32,6 +32,8 @@ Rails.application.routes.draw do
   end
 
   resources :user_purchases, only: [:index, :create, :show] do
+    get "checkout_complete", on: :collection
+
     resources :reviews, only: [:create, :edit, :update]
   end
 

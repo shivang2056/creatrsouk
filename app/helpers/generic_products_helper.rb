@@ -7,4 +7,10 @@ module GenericProductsHelper
   def product_already_purchased?
     current_user.purchases.where(product: @product).any?
   end
+
+  def store_url
+    store = @product.user.store
+
+    store && store.store_url
+  end
 end

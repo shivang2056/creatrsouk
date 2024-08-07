@@ -1,5 +1,7 @@
 class Store < ApplicationRecord
   include Rails.application.routes.url_helpers
+  DEFAULT_BACKGROUND_COLOR = "#f3f4f6"
+  DEFAULT_HIGHTLIGHT_COLOR = "#d4d4d4"
 
   belongs_to :user
   has_many :generic_products, through: :user
@@ -8,7 +10,7 @@ class Store < ApplicationRecord
   delegate :coffee_widget_enabled?, to: :user
 
   def self.find_by_request(request)
-    find_by(subdomain: request.subdomain)
+    request.subdomain.present? && find_by(subdomain: request.subdomain)
   end
 
   def store_url
@@ -26,7 +28,6 @@ class Store < ApplicationRecord
     if Rails.env.development? || Rails.env.test?
       { host: 'lvh.me', port: 3000 }
     else
-      # TODO: Need to add host for non development env.
       { host: ENV['HOST'] }
     end
   end

@@ -20,10 +20,6 @@ class StripeAccount
     @store = account.user.store
   end
 
-  def default_url_options
-    Rails.application.config.action_mailer.default_url_options
-  end
-
   def create_account
     return if account.stripe_id.present?
 

@@ -1,13 +1,10 @@
 class AttachmentDecorator
   include ActiveSupport::NumberHelper
   include Rails.application.routes.url_helpers
+  include ActiveStorageSetCurrent
 
   def initialize(product)
     @product = product
-  end
-
-  def default_url_options
-    Rails.application.config.action_mailer.default_url_options
   end
 
   def self.decorate(product)

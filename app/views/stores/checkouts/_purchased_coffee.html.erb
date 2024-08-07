@@ -1,7 +1,7 @@
 <div class="w-[850px] mx-auto bg-white shadow-xl rounded-xl p-12">
   <div class="flex justify-between">
     <h1 class="text-3xl font-medium text-gray-900"> Checkout Complete </h1>
-    <%= link_to "View Receipt", @receipt_url, target: "_blank", class: "text-sm duration-200 border font-medium focus:outline-none focus:ring-2 inline-flex items-center whitespace-nowrap bg-gray-800 hover:bg-gray-900 text-white justify-center rounded-md shadow-sm border-transparent h-10 py-2 px-4"%>
+    <%= link_to "View Receipt", @receipt_url, target: "_blank", class: "text-sm duration-200 border font-medium focus:outline-none focus:ring-2 inline-flex items-center whitespace-nowrap bg-gray-800 hover:bg-gray-900 text-white justify-center rounded-md shadow-sm border-transparent h-10 py-2 px-4", style: "background-color: #{@store.highlight_color};" %>
   </div>
 
   <div class="flex">

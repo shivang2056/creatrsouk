@@ -6,13 +6,15 @@ module Stores
     end
 
     def show
-      @user_purchase, @coffee_purchase = find_purchases_by_session(params[:session_id])
-      @receipt_url = (@user_purchase || @coffee_purchase).receipt_url
+      @retries ||= 0
 
-      if @user_purchase.present?
-        @product = @user_purchase.product
-        @attachment_decorator = AttachmentDecorator.decorate(@product)
-      end
+      execute_show
+    rescue NoMethodError
+      @retries += 1
+      sleep 5
+      retry if @retries < 10
+
+      raise
     end
 
     def create
@@ -25,6 +27,16 @@ module Stores
 
     private
 
+    def execute_show
+      @user_purchase, @coffee_purchase = find_purchases_by_session_id
+      @receipt_url = (@user_purchase || @coffee_purchase).receipt_url
+
+      if @user_purchase.present?
+        @product = @user_purchase.product
+        @attachment_decorator = AttachmentDecorator.decorate(@product)
+      end
+    end
+
     def coffee_modal_data
       {
         coffee_product: @store.coffee_product,
@@ -35,16 +47,18 @@ module Stores
       }
     end
 
-    def find_purchases_by_session(session_id)
-      generic_purchase = UserPurchase
-                          .generic
-                          .includes(product: [:user, attachments: [file_attachment: :blob]])
-                          .find_by_checkout_session_id(session_id)
-      coffee_purchase = UserPurchase
-                          .coffee
-                          .find_by_checkout_session_id(session_id)
+    def find_purchases_by_session_id
+      UserPurchase.uncached do
+        generic_purchase = UserPurchase
+                            .generic
+                            .includes(product: [:user, attachments: [file_attachment: :blob]])
+                            .find_by_checkout_session_id(params[:session_id])
+        coffee_purchase = UserPurchase
+                            .coffee
+                            .find_by_checkout_session_id(params[:session_id])
 
-      [ generic_purchase, coffee_purchase ]
+        [ generic_purchase, coffee_purchase ]
+      end
     end
 
     def build_checkout_service(product)
