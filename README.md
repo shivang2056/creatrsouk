@@ -2,6 +2,8 @@
 
 This is a digital marketplace application built with Ruby on Rails and hosted on https://creatrsouk.xyz/.
 
+Video Walkthrough: https://youtu.be/ycCc3qLlKaU
+
 
 ## Tech Stack and External Services
 
