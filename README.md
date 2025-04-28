@@ -1,13 +1,6 @@
 # CreatrSouk 
 
-This is a digital marketplace application built with Ruby on Rails and hosted on https://creatrsouk.xyz/.
-
-Login Credentials: (user+testcreatrsouk2@example.com/Qwerty123)
-
-Note: New account onboarding for stripe is currently not supported for Stripe India accounts. https://support.stripe.com/questions/moving-to-invite-only-in-india.
-
-So, new users created on https://creatrsouk.xyz/ won't be able to use stripe.
-
+This is a digital marketplace application built with Ruby on Rails.
 
 ## Features covered
 
